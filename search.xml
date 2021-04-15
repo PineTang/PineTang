@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>scrapy 重定向解决</title>
+      <link href="/blog/2021/04/15/scrapy-%E9%87%8D%E5%AE%9A%E5%90%91%E8%A7%A3%E5%86%B3/"/>
+      <url>/blog/2021/04/15/scrapy-%E9%87%8D%E5%AE%9A%E5%90%91%E8%A7%A3%E5%86%B3/</url>
+      
+        <content type="html"><![CDATA[<h2 id="只需要在每次构造请求前-在meta中添加如下信息即可-settings中如果有默认user-agent，又非本次请求的网站头也建议注释掉"><a href="#只需要在每次构造请求前-在meta中添加如下信息即可-settings中如果有默认user-agent，又非本次请求的网站头也建议注释掉" class="headerlink" title="只需要在每次构造请求前, 在meta中添加如下信息即可,settings中如果有默认user-agent，又非本次请求的网站头也建议注释掉"></a>只需要在每次构造请求前, 在meta中添加如下信息即可,settings中如果有默认user-agent，又非本次请求的网站头也建议注释掉</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">yield</span> scrapy.Request(</span><br><span class="line">    url, </span><br><span class="line">    callback=self.parse, </span><br><span class="line">    dont_filter=<span class="literal">True</span>,<span class="comment"># Scrapy是默认过滤掉重复的请求URL, 关闭它</span></span><br><span class="line">    meta=&#123; </span><br><span class="line">        <span class="string">&#x27;dont_redirect&#x27;</span>: <span class="literal">True</span>, <span class="comment"># 关闭重定向</span></span><br><span class="line">        <span class="string">&#x27;handle_httpstatus_list&#x27;</span>: [<span class="number">301</span>,<span class="number">302</span>] <span class="comment"># 接受的响应 code</span></span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> scrapy,重定向 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>用hexo搭建博客，并配置主题</title>
       <link href="/blog/2021/04/12/%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%EF%BC%8C%E5%B9%B6%E9%85%8D%E7%BD%AE%E4%B8%BB%E9%A2%98/"/>
       <url>/blog/2021/04/12/%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%EF%BC%8C%E5%B9%B6%E9%85%8D%E7%BD%AE%E4%B8%BB%E9%A2%98/</url>

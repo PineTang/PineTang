@@ -481,7 +481,7 @@
 							<nav class="site-state">
 								<div class="site-state-item site-state-posts">
 									<a href="/blog/archives">
-										<span class="site-state-item-count">1</span>
+										<span class="site-state-item-count">2</span>
 										<span class="site-state-item-name">文章</span>
 									</a>
 								</div>
@@ -493,7 +493,7 @@
 								</div>      
 								<div class="site-state-item site-state-tags">
 									<a data-toggle="modal" data-target="#blog_tags">
-										<span class="site-state-item-count">1</span>
+										<span class="site-state-item-count">2</span>
 										<span class="site-state-item-name">标签</span>
 									</a>
 								</div>
@@ -550,7 +550,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<a class="badge badge-secondary tag" href="/blog/tags/hexo-themes/" rel="tag">hexo,themes <span class="tag-num">1</span></a>
+				<a class="badge badge-secondary tag" href="/blog/tags/hexo-themes/" rel="tag">hexo,themes <span class="tag-num">1</span></a><a class="badge badge-secondary tag" href="/blog/tags/scrapy-%E9%87%8D%E5%AE%9A%E5%90%91/" rel="tag">scrapy,重定向 <span class="tag-num">1</span></a>
 			</div>
 		</div>
 	</div>
@@ -562,6 +562,66 @@
 		
 		
 				
+	<article class="post card bg-white shadow-sm border-0 post-preview">
+	<header class="post-header text-center">
+		
+		<a class="post-title" href="/blog/2021/04/15/scrapy-%E9%87%8D%E5%AE%9A%E5%90%91%E8%A7%A3%E5%86%B3/">scrapy 重定向解决</a>
+		<div class="post-meta">
+			
+						
+						<div class="post-meta-detail post-meta-detail-time">
+							<i class="fa fa-clock-o" aria-hidden="true"></i>
+							<time title="发布于 2021-4-15 16:02:50 | 编辑于 2021-4-15 16:09:10">2021-4-15 16:02
+							</time>
+						</div>
+					
+						
+							<div class="post-meta-devide">|</div>
+						
+						<div class="post-meta-detail post-meta-detail-words">
+							<i class="fa fa-book" aria-hidden="true"></i>
+							<span id="busuanzi_container_page_pv">
+								阅读<span id="busuanzi_value_page_pv"></span>次
+							</span>
+						</div>
+					
+						
+							<div class="post-meta-devide">|</div>
+						
+						<div class="post-meta-detail post-meta-detail-words">
+							<i class="fa fa-file-word-o" aria-hidden="true"></i>
+							84 字
+						</div>
+					
+						
+							<div class="post-meta-devide">|</div>
+						
+						<div class="post-meta-detail post-meta-detail-readingtime">
+							<i class="fa fa-hourglass-end" aria-hidden="true"></i>
+							1 分钟
+						</div>
+					
+		</div>
+		
+	</header>
+
+	<div class="post-content">
+		
+			
+				只需要在每次构造请求前, 在meta中添加如下信息即可,settings中如果有默认user-agent，又非本次请求的网站头也建议注释掉12345678910yield scrapy.Request(    url,     callback=self.parse,     dont_filter=True,# Scrapy是默认过滤掉重复的请求...
+			
+		
+	</div>
+
+	
+		<div class="post-tags">
+			<i class="fa fa-tags" aria-hidden="true"></i>
+			<a class="tag badge badge-secondary post-meta-detail-tag -none-link" href="/blog/tags/scrapy-%E9%87%8D%E5%AE%9A%E5%90%91/" rel="tag">scrapy,重定向</a>
+		</div>
+	
+</article>
+
+
 	<article class="post card bg-white shadow-sm border-0 post-preview">
 	<header class="post-header text-center">
 		
