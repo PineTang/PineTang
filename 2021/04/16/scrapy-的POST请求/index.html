@@ -6,7 +6,7 @@
 	<title>scrapy 的POST请求 - 程序BUG猿</title>
 	<meta charset="utf-8">
 	
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	
 	<meta name="description" content="scrapy构造POST的两种方式scrapy.FormRequestyeild scrapy.FormRequest(     url&#x3D;&#39;https:&#x2F;&#x2F;........&#39;,      method&#x3D;&#39;post&#39;,  # 选择post     dont_filter&#x3D;True, # 关闭去重, 非必须     formdata&#x3D;data, # post 数据根据情况 选择是  dict类型: d">
 <meta property="og:type" content="article">
@@ -21,9 +21,9 @@
 <meta property="article:tag" content="scrapy请求方式">
 <meta name="twitter:card" content="summary">
 
-	<meta name="theme-color" content="#5e72e4">
-	<meta name="theme-color-rgb" content="94,114,228">
-	<meta name="theme-color-origin" content="#5e72e4">
+	<meta name="theme-color" content="#C53D85">
+	<meta name="theme-color-rgb" content="197,61,133">
+	<meta name="theme-color-origin" content="#C53D85">
 	<meta name="argon-enable-custom-theme-color" content="true">
 	<meta name="theme-card-radius" content="30">
 	<meta name="theme-version" content="1.0.1">
@@ -65,7 +65,7 @@
 					scale: 0.9
 				},
 			
-			pangu: "false",
+			pangu: "true",
 			
 				lazyload: {
 					threshold: 800,
@@ -77,7 +77,7 @@
 		}
 	</script>
 	<script>
-		var darkmodeAutoSwitch = "alwayson";
+		var darkmodeAutoSwitch = "time";
 		function setDarkmode(enable){
 			if (enable == true){
 				$("html").addClass("darkmode");
@@ -163,13 +163,13 @@
 <style id="themecolor_css">
 	
 	:root{
-		--themecolor: #5e72e4;
-		--themecolor-dark0: #5368E2;
-		--themecolor-dark: #485FE0;
-		--themecolor-dark2: #324CDD;
-		--themecolor-dark3: #233DD2;
-		--themecolor-light: #8A98EB;
-		--themecolor-rgbstr: 94,114,228;
+		--themecolor: #C53D85;
+		--themecolor-dark0: #BD387F;
+		--themecolor-dark: #B33678;
+		--themecolor-dark2: #9F306B;
+		--themecolor-dark3: #8C2A5E;
+		--themecolor-light: #D1649E;
+		--themecolor-rgbstr: 197,61,133;
 		--themecolor-gradient: linear-gradient(150deg,var(--themecolor-light) 15%, var(--themecolor) 70%, var(--themecolor-dark0) 94%);
 
 	}
@@ -189,7 +189,7 @@
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
-				<a class="navbar-brand" href="/">程序BUG猿</a>
+				<a class="navbar-brand" href="/">哪有什么奇迹，只不过是坚持到了最后！</a>
 				<div class="navbar-collapse collapse" id="navbar_global">
 					<div class="navbar-collapse-header">
 						<div class="row">
@@ -434,10 +434,19 @@
 <div id="sidebar_mask"></div>
 <aside id="leftbar" class="leftbar widget-area" role="complementary">
 		
+			<div id="leftbar_announcement" class="card bg-white shadow-sm border-0">
+				<div class="leftbar-announcement-body">
+					<div class="leftbar-announcement-title text-white">公告</div>
+					<div class="leftbar-announcement-content text-white">pineker@163.com</div>
+				</div>
+			</div>
+		
 		<div id="leftbar_part1" class="widget widget_search card bg-white shadow-sm border-0">
 			<div class="leftbar-banner card-body">
 				<span class="leftbar-banner-title text-white">程序BUG猿</span>
 				
+				
+					<span class="leftbar-banner-subtitle text-white"><span class='hitokoto'></span></span>
 				
 			</div>
 			
@@ -523,20 +532,12 @@
 							
 									<div class="site-author-links">
 										
-											<div class='site-author-links-item'>
-												<a href="/https://pineker.gitee.io/" rel='noopener' target='_blank'>my</a>
-											</div>
-										
 									</div>
 								
 							
 									<div class='site-friend-links'>
 										<div class='site-friend-links-title'><i class='fa fa-fw fa-link'></i> Links</div>
 										<ul class='site-friend-links-ul'>
-											
-												<li class='site-friend-links-item'>
-													<a href='/https://pineker.gitee.io/' rel='noopener' target='_blank'>my_f</a>
-												</li>
 											
 										</ul>
 									</div>

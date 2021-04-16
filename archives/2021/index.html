@@ -6,7 +6,7 @@
 	<title>归档 : 2021 - 程序BUG猿</title>
 	<meta charset="utf-8">
 	
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	
 	<meta property="og:type" content="website">
 <meta property="og:title" content="程序BUG猿">
@@ -16,9 +16,9 @@
 <meta property="article:author" content="Tangs">
 <meta name="twitter:card" content="summary">
 
-	<meta name="theme-color" content="#5e72e4">
-	<meta name="theme-color-rgb" content="94,114,228">
-	<meta name="theme-color-origin" content="#5e72e4">
+	<meta name="theme-color" content="#C53D85">
+	<meta name="theme-color-rgb" content="197,61,133">
+	<meta name="theme-color-origin" content="#C53D85">
 	<meta name="argon-enable-custom-theme-color" content="true">
 	<meta name="theme-card-radius" content="30">
 	<meta name="theme-version" content="1.0.1">
@@ -60,7 +60,7 @@
 					scale: 0.9
 				},
 			
-			pangu: "false",
+			pangu: "true",
 			
 				lazyload: {
 					threshold: 800,
@@ -72,7 +72,7 @@
 		}
 	</script>
 	<script>
-		var darkmodeAutoSwitch = "alwayson";
+		var darkmodeAutoSwitch = "time";
 		function setDarkmode(enable){
 			if (enable == true){
 				$("html").addClass("darkmode");
@@ -158,13 +158,13 @@
 <style id="themecolor_css">
 	
 	:root{
-		--themecolor: #5e72e4;
-		--themecolor-dark0: #5368E2;
-		--themecolor-dark: #485FE0;
-		--themecolor-dark2: #324CDD;
-		--themecolor-dark3: #233DD2;
-		--themecolor-light: #8A98EB;
-		--themecolor-rgbstr: 94,114,228;
+		--themecolor: #C53D85;
+		--themecolor-dark0: #BD387F;
+		--themecolor-dark: #B33678;
+		--themecolor-dark2: #9F306B;
+		--themecolor-dark3: #8C2A5E;
+		--themecolor-light: #D1649E;
+		--themecolor-rgbstr: 197,61,133;
 		--themecolor-gradient: linear-gradient(150deg,var(--themecolor-light) 15%, var(--themecolor) 70%, var(--themecolor-dark0) 94%);
 
 	}
@@ -184,7 +184,7 @@
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
-				<a class="navbar-brand" href="/">程序BUG猿</a>
+				<a class="navbar-brand" href="/">哪有什么奇迹，只不过是坚持到了最后！</a>
 				<div class="navbar-collapse collapse" id="navbar_global">
 					<div class="navbar-collapse-header">
 						<div class="row">
@@ -437,10 +437,19 @@
 <div id="sidebar_mask"></div>
 <aside id="leftbar" class="leftbar widget-area" role="complementary">
 		
+			<div id="leftbar_announcement" class="card bg-white shadow-sm border-0">
+				<div class="leftbar-announcement-body">
+					<div class="leftbar-announcement-title text-white">公告</div>
+					<div class="leftbar-announcement-content text-white">pineker@163.com</div>
+				</div>
+			</div>
+		
 		<div id="leftbar_part1" class="widget widget_search card bg-white shadow-sm border-0">
 			<div class="leftbar-banner card-body">
 				<span class="leftbar-banner-title text-white">程序BUG猿</span>
 				
+				
+					<span class="leftbar-banner-subtitle text-white"><span class='hitokoto'></span></span>
 				
 			</div>
 			
@@ -495,20 +504,12 @@
 							
 									<div class="site-author-links">
 										
-											<div class='site-author-links-item'>
-												<a href="/https://pineker.gitee.io/" rel='noopener' target='_blank'>my</a>
-											</div>
-										
 									</div>
 								
 							
 									<div class='site-friend-links'>
 										<div class='site-friend-links-title'><i class='fa fa-fw fa-link'></i> Links</div>
 										<ul class='site-friend-links-ul'>
-											
-												<li class='site-friend-links-item'>
-													<a href='/https://pineker.gitee.io/' rel='noopener' target='_blank'>my_f</a>
-												</li>
 											
 										</ul>
 									</div>
@@ -557,15 +558,18 @@
 		
 				
 	<article class="post card bg-white shadow-sm border-0 post-preview">
-	<header class="post-header text-center">
+	<header class="post-header text-center post-header-with-thumbnail">
 		
+				<img class='post-thumbnail lazyload' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABBJREFUeNpi+P//PwNAgAEACPwC/tuiTRYAAAAASUVORK5CYII=' data-original='http://image.wufazhuce.com/FmYSTDrtrkf8Kbg8K9KbnFfejW1T' alt='thumbnail'></img>
+				<div class='post-header-text-container'>
+			
 		<a class="post-title" href="/2021/04/16/scrapy-%E5%B0%86str%E7%B1%BB%E5%9E%8B-html%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E8%BD%AC%E4%B8%BAscrapy%E7%9A%84response%E5%AF%B9%E8%B1%A1/">scrapy 将str类型 html字符串，转为scrapy的response对象</a>
 		<div class="post-meta">
 			
 						
 						<div class="post-meta-detail post-meta-detail-time">
 							<i class="fa fa-clock-o" aria-hidden="true"></i>
-							<time title="发布于 2021-4-16 15:13:41 | 编辑于 2021-4-16 15:21:49">2021-4-16 15:13
+							<time title="发布于 2021-4-16 15:13:41 | 编辑于 2021-4-16 17:00:20">2021-4-16 15:13
 							</time>
 						</div>
 					
@@ -605,13 +609,16 @@
 					
 		</div>
 		
+				</div>
+			
 	</header>
 
 	<div class="post-content">
 		
 			
-				以下内容为，如何将str类型的 html文本转为 scrapy的response对象
-这么做的好处是, 转为scrapy自身的response对象,就可以使用response.css(),就可以使用response.xpath(),就可以使用response.json(),等方法, 当然你也可以使用 lxml 进行处理, 我这里是为了方便统一大量的...
+				
+以下内容为，如何将str类型的 html文本转为 scrapy的response对象
+这么做的好处是, 转为scrapy自身的response对象,就可以使用response.css(),就可以使用response.xpath(),就可以使用response.json(),等方法, 当然你也可以使用 lxml 进行处理, 我这里是为了方便统一大量...
 			
 		
 	</div>
@@ -741,7 +748,7 @@
 						
 						<div class="post-meta-detail post-meta-detail-readingtime">
 							<i class="fa fa-hourglass-end" aria-hidden="true"></i>
-							1 分钟
+							2 分钟
 						</div>
 					
 		</div>
