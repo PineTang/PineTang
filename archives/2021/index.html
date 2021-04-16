@@ -475,19 +475,19 @@
 							<nav class="site-state">
 								<div class="site-state-item site-state-posts">
 									<a href="/archives">
-										<span class="site-state-item-count">3</span>
+										<span class="site-state-item-count">5</span>
 										<span class="site-state-item-name">文章</span>
 									</a>
 								</div>
 								<div class="site-state-item site-state-categories">
 									<a data-toggle="modal" data-target="#blog_categories">
-										<span class="site-state-item-count">3</span>
+										<span class="site-state-item-count">4</span>
 										<span class="site-state-item-name">分类</span>
 									</a>
 								</div>      
 								<div class="site-state-item site-state-tags">
 									<a data-toggle="modal" data-target="#blog_tags">
-										<span class="site-state-item-count">4</span>
+										<span class="site-state-item-count">8</span>
 										<span class="site-state-item-name">标签</span>
 									</a>
 								</div>
@@ -529,7 +529,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<a class="badge badge-secondary tag" href="/categories/Python/" rel="tag">Python <span class="tag-num">1</span></a><a class="badge badge-secondary tag" href="/categories/%E4%B8%AA%E4%BA%BA/" rel="tag">个人 <span class="tag-num">1</span></a><a class="badge badge-secondary tag" href="/categories/%E7%88%AC%E8%99%AB/" rel="tag">爬虫 <span class="tag-num">1</span></a>
+				<a class="badge badge-secondary tag" href="/categories/Python/" rel="tag">Python <span class="tag-num">1</span></a><a class="badge badge-secondary tag" href="/categories/Scrapy/" rel="tag">Scrapy <span class="tag-num">2</span></a><a class="badge badge-secondary tag" href="/categories/%E4%B8%AA%E4%BA%BA/" rel="tag">个人 <span class="tag-num">1</span></a><a class="badge badge-secondary tag" href="/categories/%E7%88%AC%E8%99%AB/" rel="tag">爬虫 <span class="tag-num">1</span></a>
 			</div>
 		</div>
 	</div>
@@ -544,7 +544,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<a class="badge badge-secondary tag" href="/tags/hexo-themes/" rel="tag">hexo,themes <span class="tag-num">1</span></a><a class="badge badge-secondary tag" href="/tags/python/" rel="tag">python <span class="tag-num">1</span></a><a class="badge badge-secondary tag" href="/tags/scrapy-%E9%87%8D%E5%AE%9A%E5%90%91/" rel="tag">scrapy,重定向 <span class="tag-num">1</span></a><a class="badge badge-secondary tag" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86/" rel="tag">字符串处理 <span class="tag-num">1</span></a>
+				<a class="badge badge-secondary tag" href="/tags/Python/" rel="tag">Python <span class="tag-num">1</span></a><a class="badge badge-secondary tag" href="/tags/Scrapy/" rel="tag">Scrapy <span class="tag-num">1</span></a><a class="badge badge-secondary tag" href="/tags/hexo/" rel="tag">hexo <span class="tag-num">1</span></a><a class="badge badge-secondary tag" href="/tags/scrapy%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="tag">scrapy对象的使用 <span class="tag-num">1</span></a><a class="badge badge-secondary tag" href="/tags/scrapy%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F/" rel="tag">scrapy请求方式 <span class="tag-num">1</span></a><a class="badge badge-secondary tag" href="/tags/themes/" rel="tag">themes <span class="tag-num">1</span></a><a class="badge badge-secondary tag" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86/" rel="tag">字符串处理 <span class="tag-num">1</span></a><a class="badge badge-secondary tag" href="/tags/%E9%87%8D%E5%AE%9A%E5%90%91/" rel="tag">重定向 <span class="tag-num">1</span></a>
 			</div>
 		</div>
 	</div>
@@ -559,13 +559,154 @@
 	<article class="post card bg-white shadow-sm border-0 post-preview">
 	<header class="post-header text-center">
 		
+		<a class="post-title" href="/2021/04/16/scrapy-%E5%B0%86str%E7%B1%BB%E5%9E%8B-html%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E8%BD%AC%E4%B8%BAscrapy%E7%9A%84response%E5%AF%B9%E8%B1%A1/">scrapy 将str类型 html字符串，转为scrapy的response对象</a>
+		<div class="post-meta">
+			
+						
+						<div class="post-meta-detail post-meta-detail-time">
+							<i class="fa fa-clock-o" aria-hidden="true"></i>
+							<time title="发布于 2021-4-16 15:13:41 | 编辑于 2021-4-16 15:21:49">2021-4-16 15:13
+							</time>
+						</div>
+					
+						
+							<div class="post-meta-devide">|</div>
+						
+						<div class="post-meta-detail post-meta-detail-categories">
+							<i class="fa fa-bookmark-o" aria-hidden="true"></i>
+							<a class="post-meta-detail-catagory-link" href="/categories/Scrapy/">Scrapy</a>
+						</div>
+					
+						
+							<div class="post-meta-devide">|</div>
+						
+						<div class="post-meta-detail post-meta-detail-words">
+							<i class="fa fa-book" aria-hidden="true"></i>
+							<span id="busuanzi_container_page_pv">
+								阅读<span id="busuanzi_value_page_pv"></span>次
+							</span>
+						</div>
+					
+						
+							<div class="post-meta-devide">|</div>
+						
+						<div class="post-meta-detail post-meta-detail-words">
+							<i class="fa fa-file-word-o" aria-hidden="true"></i>
+							81 字
+						</div>
+					
+						
+							<div class="post-meta-devide">|</div>
+						
+						<div class="post-meta-detail post-meta-detail-readingtime">
+							<i class="fa fa-hourglass-end" aria-hidden="true"></i>
+							1 分钟
+						</div>
+					
+		</div>
+		
+	</header>
+
+	<div class="post-content">
+		
+			
+				以下内容为，如何将str类型的 html文本转为 scrapy的response对象
+这么做的好处是, 转为scrapy自身的response对象,就可以使用response.css(),就可以使用response.xpath(),就可以使用response.json(),等方法, 当然你也可以使用 lxml 进行处理, 我这里是为了方便统一大量的...
+			
+		
+	</div>
+
+	
+		<div class="post-tags">
+			<i class="fa fa-tags" aria-hidden="true"></i>
+			<a class="tag badge badge-secondary post-meta-detail-tag -none-link" href="/tags/scrapy%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="tag">scrapy对象的使用</a>
+		</div>
+	
+</article>
+
+
+	<article class="post card bg-white shadow-sm border-0 post-preview">
+	<header class="post-header text-center">
+		
+		<a class="post-title" href="/2021/04/16/scrapy-%E7%9A%84POST%E8%AF%B7%E6%B1%82/">scrapy 的POST请求</a>
+		<div class="post-meta">
+			
+						
+						<div class="post-meta-detail post-meta-detail-time">
+							<i class="fa fa-clock-o" aria-hidden="true"></i>
+							<time title="发布于 2021-4-16 15:03:04 | 编辑于 2021-4-16 15:12:26">2021-4-16 15:03
+							</time>
+						</div>
+					
+						
+							<div class="post-meta-devide">|</div>
+						
+						<div class="post-meta-detail post-meta-detail-categories">
+							<i class="fa fa-bookmark-o" aria-hidden="true"></i>
+							<a class="post-meta-detail-catagory-link" href="/categories/Scrapy/">Scrapy</a>
+						</div>
+					
+						
+							<div class="post-meta-devide">|</div>
+						
+						<div class="post-meta-detail post-meta-detail-words">
+							<i class="fa fa-book" aria-hidden="true"></i>
+							<span id="busuanzi_container_page_pv">
+								阅读<span id="busuanzi_value_page_pv"></span>次
+							</span>
+						</div>
+					
+						
+							<div class="post-meta-devide">|</div>
+						
+						<div class="post-meta-detail post-meta-detail-words">
+							<i class="fa fa-file-word-o" aria-hidden="true"></i>
+							111 字
+						</div>
+					
+						
+							<div class="post-meta-devide">|</div>
+						
+						<div class="post-meta-detail post-meta-detail-readingtime">
+							<i class="fa fa-hourglass-end" aria-hidden="true"></i>
+							1 分钟
+						</div>
+					
+		</div>
+		
+	</header>
+
+	<div class="post-content">
+		
+			
+				scrapy构造POST的两种方式scrapy.FormRequestyeild scrapy.FormRequest(
+    url='https://........', 
+    method='post',  # 选择post
+    dont_filter=True, # 关闭去重, 非必须
+    formdata=data, # p...
+			
+		
+	</div>
+
+	
+		<div class="post-tags">
+			<i class="fa fa-tags" aria-hidden="true"></i>
+			<a class="tag badge badge-secondary post-meta-detail-tag -none-link" href="/tags/scrapy%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F/" rel="tag">scrapy请求方式</a>
+		</div>
+	
+</article>
+
+
+	<article class="post card bg-white shadow-sm border-0 post-preview">
+	<header class="post-header text-center">
+		
 		<a class="post-title" href="/2021/04/16/python-list%E6%A0%BC%E5%BC%8F%E7%9A%84str-%E8%BD%AC%E6%8D%A2%E6%88%90list%E7%B1%BB%E5%9E%8B/">python list格式的str, 转换成list类型</a>
 		<div class="post-meta">
 			
 						
 						<div class="post-meta-detail post-meta-detail-time">
 							<i class="fa fa-clock-o" aria-hidden="true"></i>
-							<time title="发布于 2021-4-16 10:13:59 | 编辑于 2021-4-16 13:29:36">2021-4-16 10:13
+							<time title="发布于 2021-4-16 10:13:59 | 编辑于 2021-4-16 15:03:51">2021-4-16 10:13
 							</time>
 						</div>
 					
@@ -624,7 +765,7 @@ In [173]: type(...
 	
 		<div class="post-tags">
 			<i class="fa fa-tags" aria-hidden="true"></i>
-			<a class="tag badge badge-secondary post-meta-detail-tag -none-link" href="/tags/python/" rel="tag">python</a><a class="tag badge badge-secondary post-meta-detail-tag -none-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86/" rel="tag">字符串处理</a>
+			<a class="tag badge badge-secondary post-meta-detail-tag -none-link" href="/tags/Python/" rel="tag">Python</a><a class="tag badge badge-secondary post-meta-detail-tag -none-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86/" rel="tag">字符串处理</a>
 		</div>
 	
 </article>
@@ -639,7 +780,7 @@ In [173]: type(...
 						
 						<div class="post-meta-detail post-meta-detail-time">
 							<i class="fa fa-clock-o" aria-hidden="true"></i>
-							<time title="发布于 2021-4-15 16:02:50 | 编辑于 2021-4-16 13:29:45">2021-4-15 16:02
+							<time title="发布于 2021-4-15 16:02:50 | 编辑于 2021-4-16 15:04:14">2021-4-15 16:02
 							</time>
 						</div>
 					
@@ -696,7 +837,7 @@ yield scrapy.Request(
 	
 		<div class="post-tags">
 			<i class="fa fa-tags" aria-hidden="true"></i>
-			<a class="tag badge badge-secondary post-meta-detail-tag -none-link" href="/tags/scrapy-%E9%87%8D%E5%AE%9A%E5%90%91/" rel="tag">scrapy,重定向</a>
+			<a class="tag badge badge-secondary post-meta-detail-tag -none-link" href="/tags/Scrapy/" rel="tag">Scrapy</a><a class="tag badge badge-secondary post-meta-detail-tag -none-link" href="/tags/%E9%87%8D%E5%AE%9A%E5%90%91/" rel="tag">重定向</a>
 		</div>
 	
 </article>
@@ -711,7 +852,7 @@ yield scrapy.Request(
 						
 						<div class="post-meta-detail post-meta-detail-time">
 							<i class="fa fa-clock-o" aria-hidden="true"></i>
-							<time title="发布于 2021-4-12 18:03:07 | 编辑于 2021-4-16 13:29:17">2021-4-12 18:03
+							<time title="发布于 2021-4-12 18:03:07 | 编辑于 2021-4-16 15:04:01">2021-4-12 18:03
 							</time>
 						</div>
 					
@@ -779,7 +920,7 @@ hexo 安装后进入你安装的目录/themes下，下载主题
 	
 		<div class="post-tags">
 			<i class="fa fa-tags" aria-hidden="true"></i>
-			<a class="tag badge badge-secondary post-meta-detail-tag -none-link" href="/tags/hexo-themes/" rel="tag">hexo,themes</a>
+			<a class="tag badge badge-secondary post-meta-detail-tag -none-link" href="/tags/hexo/" rel="tag">hexo</a><a class="tag badge badge-secondary post-meta-detail-tag -none-link" href="/tags/themes/" rel="tag">themes</a>
 		</div>
 	
 </article>

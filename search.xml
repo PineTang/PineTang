@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>scrapy 将str类型 html字符串，转为scrapy的response对象</title>
+      <link href="2021/04/16/scrapy-%E5%B0%86str%E7%B1%BB%E5%9E%8B-html%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E8%BD%AC%E4%B8%BAscrapy%E7%9A%84response%E5%AF%B9%E8%B1%A1/"/>
+      <url>2021/04/16/scrapy-%E5%B0%86str%E7%B1%BB%E5%9E%8B-html%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%8C%E8%BD%AC%E4%B8%BAscrapy%E7%9A%84response%E5%AF%B9%E8%B1%A1/</url>
+      
+        <content type="html"><![CDATA[<h3 id="以下内容为，如何将str类型的-html文本转为-scrapy的response对象"><a href="#以下内容为，如何将str类型的-html文本转为-scrapy的response对象" class="headerlink" title="以下内容为，如何将str类型的 html文本转为 scrapy的response对象"></a>以下内容为，如何将str类型的 html文本转为 scrapy的response对象</h3><blockquote><p>这么做的好处是, 转为scrapy自身的response对象,<br>就可以使用response.css(),<br>就可以使用response.xpath(),<br>就可以使用response.json(),<br>等方法, 当然你也可以使用 lxml 进行处理, 我这里是为了方便统一大量的爬虫书写规范</p></blockquote><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> scrapy<span class="token punctuation">.</span>http <span class="token keyword">import</span> HtmlResponse<span class="token comment"># content为待转换的html文本，如：'&lt;p>balabalbablabla&lt;/p>'</span>html <span class="token operator">=</span> HtmlResponse<span class="token punctuation">(</span>            url<span class="token operator">=</span>response<span class="token punctuation">.</span>url<span class="token punctuation">,</span> <span class="token comment"># 设置一个url, 推荐当前使用方式</span>            body<span class="token operator">=</span>content<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token comment"># 选择编码格式</span>        <span class="token punctuation">)</span><span class="token comment"># 现在 html 就是我们转换后的 response类型对象, 可以进行 html.css(), html.xpath()等操作了</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Scrapy </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> scrapy对象的使用 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>scrapy 的POST请求</title>
+      <link href="2021/04/16/scrapy-%E7%9A%84POST%E8%AF%B7%E6%B1%82/"/>
+      <url>2021/04/16/scrapy-%E7%9A%84POST%E8%AF%B7%E6%B1%82/</url>
+      
+        <content type="html"><![CDATA[<h2 id="scrapy构造POST的两种方式"><a href="#scrapy构造POST的两种方式" class="headerlink" title="scrapy构造POST的两种方式"></a>scrapy构造POST的两种方式</h2><h3 id="scrapy-FormRequest"><a href="#scrapy-FormRequest" class="headerlink" title="scrapy.FormRequest"></a>scrapy.FormRequest</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python">yeild scrapy<span class="token punctuation">.</span>FormRequest<span class="token punctuation">(</span>    url<span class="token operator">=</span><span class="token string">'https://........'</span><span class="token punctuation">,</span>     method<span class="token operator">=</span><span class="token string">'post'</span><span class="token punctuation">,</span>  <span class="token comment"># 选择post</span>    dont_filter<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> <span class="token comment"># 关闭去重, 非必须</span>    formdata<span class="token operator">=</span>data<span class="token punctuation">,</span> <span class="token comment"># post 数据根据情况 选择是  dict类型: data / json字符串类型: json.dumps(data)</span>    callback<span class="token operator">=</span>self<span class="token punctuation">.</span>parse<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="scrapy-Request"><a href="#scrapy-Request" class="headerlink" title="scrapy.Request"></a>scrapy.Request</h3><blockquote><p>跟我们平时用get请求的方法一样</p></blockquote><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">yield</span> scrapy<span class="token punctuation">.</span>Request<span class="token punctuation">(</span>        method<span class="token operator">=</span><span class="token string">'POST'</span><span class="token punctuation">,</span><span class="token comment"># 选择post</span>        url<span class="token operator">=</span><span class="token string">'https://...'</span><span class="token punctuation">,</span>         body<span class="token operator">=</span>json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment"># 注意这里的key: body 就是指你需要请求的post data, 同样post 数据根据情况 选择是  dict类型: data / json字符串类型: json.dumps(data)</span>        headers<span class="token operator">=</span>self<span class="token punctuation">.</span>headers<span class="token punctuation">,</span> <span class="token comment"># dict 类型</span>        callback<span class="token operator">=</span>self<span class="token punctuation">.</span>parse<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Scrapy </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> scrapy请求方式 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>python list格式的str, 转换成list类型</title>
       <link href="2021/04/16/python-list%E6%A0%BC%E5%BC%8F%E7%9A%84str-%E8%BD%AC%E6%8D%A2%E6%88%90list%E7%B1%BB%E5%9E%8B/"/>
       <url>2021/04/16/python-list%E6%A0%BC%E5%BC%8F%E7%9A%84str-%E8%BD%AC%E6%8D%A2%E6%88%90list%E7%B1%BB%E5%9E%8B/</url>
@@ -20,9 +70,9 @@
       
         <tags>
             
-            <tag> python </tag>
-            
             <tag> 字符串处理 </tag>
+            
+            <tag> Python </tag>
             
         </tags>
       
@@ -47,7 +97,9 @@
       
         <tags>
             
-            <tag> scrapy,重定向 </tag>
+            <tag> Scrapy </tag>
+            
+            <tag> 重定向 </tag>
             
         </tags>
       
@@ -72,7 +124,9 @@
       
         <tags>
             
-            <tag> hexo,themes </tag>
+            <tag> hexo </tag>
+            
+            <tag> themes </tag>
             
         </tags>
       
