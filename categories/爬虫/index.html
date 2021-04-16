@@ -605,7 +605,7 @@
 						
 						<div class="post-meta-detail post-meta-detail-words">
 							<i class="fa fa-file-word-o" aria-hidden="true"></i>
-							84 字
+							59 字
 						</div>
 					
 						
@@ -623,7 +623,11 @@
 	<div class="post-content">
 		
 			
-				只需要在每次构造请求前, 在meta中添加如下信息即可,settings中如果有默认user-agent，又非本次请求的网站头也建议注释掉12345678910yield scrapy.Request(    url,     callback=self.parse,     dont_filter=True,# Scrapy是默认过滤掉重复的请求...
+				只需要在每次构造请求前, 在meta中添加如下信息即可,settings中如果有默认user-agent，又非本次请求的网站头也建议注释掉
+yield scrapy.Request(
+    url, 
+    callback=self.parse, 
+    dont_filter=True,# Scrapy是默认过滤掉重复的请求URL, 关闭...
 			
 		
 	</div>

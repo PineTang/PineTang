@@ -605,7 +605,7 @@
 						
 						<div class="post-meta-detail post-meta-detail-words">
 							<i class="fa fa-file-word-o" aria-hidden="true"></i>
-							337 字
+							216 字
 						</div>
 					
 						
@@ -626,7 +626,10 @@
 				今天遇到一个list格式的str，我想重新转回list类型
 待转换目标：
 
-12345In [172]: re.findall(&#x27;&quot;TemplateId&quot;:(.*?),&#x27;,rsp.text)[0]Out[172]: &#x27;[&quot;&#123;652B0562-7D75-46D2-A6A6-C63C...
+In [172]: re.findall('"TemplateId":(.*?),',rsp.text)[0]
+Out[172]: '["&#123;652B0562-7D75-46D2-A6A6-C63CF833AE3A&#125;"]'
+
+In [173]: type(...
 			
 		
 	</div>
