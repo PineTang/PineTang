@@ -13,8 +13,21 @@ yield scrapy.Request(
     callback=self.parse, 
     dont_filter=True,# Scrapy是默认过滤掉重复的请求URL, 关闭它
     meta={ 
-        'dont_redirect': True, # 关闭重定向
-        'handle_httpstatus_list': [301,302] # 接受的响应 code
+        'dont_redirect': True, # 不允许重定向
+        'handle_httpstatus_list': [301,302] # 允许的响应 code
     }
 )
 ```
+
+## 如果你需要重定向后的请求那么，需要改为：
+```python
+yield scrapy.Request(
+    url, 
+    callback=self.parse, 
+    dont_filter=True,# Scrapy是默认过滤掉重复的请求URL, 关闭它
+    meta={ 
+        'dont_redirect': False, # 允许重定向
+    }
+)
+```
+> 这样就可以拿到重定向后的数据
