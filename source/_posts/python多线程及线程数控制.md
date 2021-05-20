@@ -35,6 +35,14 @@ if __name__ == "__main__":
         # 线程调用
         t = threading.Thread(target=io_task, args=(sema, taks_num,))
         t.start()
+    
+    # 等待所有线程结束，继续往下操作
+    t.join()
+
+    '''
+        do soming
+    '''
+    print("所有任务完成！")
 
 # 输出结果
 
@@ -44,6 +52,9 @@ if __name__ == "__main__":
 
 调用线程2
 调用线程3
+...
+...
+所有任务完成！
 ```
 
 ### 个人理解

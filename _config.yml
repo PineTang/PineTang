@@ -18,7 +18,8 @@ search:
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://PineKer.gitee.io
+# url: http://PineKer.gitee.io
+url: https://PineTang.github.io.git
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -109,5 +110,6 @@ theme: argon
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: https://gitee.com/PineKer/PineKer.git
+  # repo: https://gitee.com/PineKer/PineKer.git
+  repo: https://github.com/PineTang/PineTang.github.io.git
   branch: master
