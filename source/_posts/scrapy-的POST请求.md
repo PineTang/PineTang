@@ -47,3 +47,99 @@ yield scrapy.Request(url='https://www....',
                      headers=FatherSpider.formatHeader(self.hd), 
                      callback=self.parse)
 ```
+
+## 请求参数设置方法
+### GET请求 查询字符串
+#### 1. 使用FormRequest 
+
+```python
+start_urls = ['https://careers.tencent.com/tencentcareer/api/post/Query?']
+
+def start_requests(self):
+    for url in self.start_urls:
+        params = {
+            "timestamp": str(int(time.time() * 1000)),
+            "countryId": "",
+            "cityId": "",
+            "bgIds": "",
+            "productId": "",
+            "categoryId": "",
+            "parentCategoryId": "",
+            "attrId": "",
+            "keyword": "",
+            "pageIndex": "1",
+            "pageSize": "10",
+            "language": "zh-cn",
+            "area": "cn"
+        }
+        yield scrapy.FormRequest(url, 
+                                method="GET", 
+                                formdata=params)
+```
+
+#### 2. 使用urlencode
+
+```python
+from urllib.parse import urlencode
+...
+start_urls = ['https://careers.tencent.com/tencentcareer/api/post/Query?']
+
+def start_requests(self):
+    for url in self.start_urls:
+        params = {
+            "timestamp": str(int(time.time() * 1000)),
+            "countryId": "",
+            "cityId": "",
+            "bgIds": "",
+            "productId": "",
+            "categoryId": "",
+            "parentCategoryId": "",
+            "attrId": "",
+            "keyword": "",
+            "pageIndex": "1",
+            "pageSize": "10",
+            "language": "zh-cn",
+            "area": "cn"
+        }
+        url = url + urlencode(params)
+        yield scrapy.Request(url,
+                             method="GET")
+```
+
+### 请求 payload (GET)
+```python
+import json
+
+payload= {
+    "page": 1, 
+    "size": 15, 
+    "searchKeys": ["companyNameCN", "companyNameEN"],
+    "isSearch": False,
+    "selectAndMap": {
+        "categoryId": [id], 
+        "boothAreaSearch": [], 
+        "boothNumber": []
+    },
+    "orderModel": {
+        "order": "asc", 
+        "properties": ["companyNamePinyin"]
+    },
+    "selectOrMap": {
+        "isPovertyAlleviation": [], 
+        "isFirstJoin": [], 
+        "isContinuousJoin": [],
+        "isBrand": [],
+        "exhibitorType": [], 
+        "productTrait": [], 
+        "isCfWinner": [], 
+        "tradeTypes": [],
+        "isGreenAward": [],
+        "isInvitationAward": []
+    }, 
+    "searchValue": ""
+}
+
+yield scrapy.Request(url, 
+                     method="GET", 
+                     body=json.dumps(data) )
+```
