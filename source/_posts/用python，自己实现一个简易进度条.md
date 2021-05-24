@@ -25,5 +25,8 @@ for i in range(task):
     time.sleep(0.1)
 ```
 > 效果如下
+
+
 ![img](https://gitee.com/PineKer/myfiles/raw/master/blog/202105241.png)
+
 ![img](https://gitee.com/PineKer/myfiles/raw/master/blog/202105242.png)
