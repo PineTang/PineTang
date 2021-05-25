@@ -141,5 +141,5 @@ payload= {
 
 yield scrapy.Request(url, 
                      method="GET", 
-                     body=json.dumps(data) )
+                     body=json.dumps(payload) )
 ```
