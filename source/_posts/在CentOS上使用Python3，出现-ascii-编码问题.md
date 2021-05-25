@@ -1,5 +1,5 @@
 ---
-title: CentOS后上a使在CentOS上使用Python3，出现'ascii'编码问题
+title: 在CentOS上使用Python3，出现'ascii'编码问题
 date: 2021-05-25 10:36:36
 tags: [Python,CentOS]
 categories: Linux
