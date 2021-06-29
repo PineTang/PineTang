@@ -142,4 +142,43 @@ payload= {
 yield scrapy.Request(url, 
                      method="GET", 
                      body=json.dumps(payload) )
+
+```
+
+### POST请求 参数
+#### 字符串格式表单 (Tue Jun 29 14:01:10 2021)
+![例如](https://gitee.com/PineKer/myfiles/raw/master/blog/20210629_scrapy_post_params.png)
+> 直接使用 `json.dumps(params_data)` 不符合格式要求，所以采用 `urlencode`
+```python
+
+params_data = [
+    ('page', str(self.the_page)),
+    ('view_name', 'defence_news_list_beta'),
+    ('view_display_id', 'panel_pane_list3x3_all'),
+    ('view_args', ''),
+    ('view_path', 'all-news'),
+    ('view_base_path', ''),
+    ('view_dom_id', self.params_view_dom_id),
+    ('pager_element', '0'),
+    ('ajax_html_ids[]', 'global_nav_main_wrapper'),
+    ('ajax_html_ids[]', 'global_nav_sitemap_responsive'),
+    ...
+    ...
+    ('ajax_html_ids[]', 'edit-field-related-curated-topic-target-id'),
+    ('ajax_html_ids[]', 'edit-submit-defence-news-list-beta'),
+    ('ajax_html_ids[]', 'edit-reset'),
+    ('ajax_page_state[theme]', 'defencenewsalpha'),
+    ('ajax_page_state[theme_token]', jsonpath(Drupal_settings, '$..theme_token')[0]),
+    ('ajax_page_state[css][modules/system/system.base.css]', '1'),
+    ...,
+    ('ajax_page_state[js][sites/default/themes/custom/bootstrap/js/misc/ajax.js]', '1'),
+]
+post_data = urlencode(params_data)
+yield scrapy.Request(
+    url=url, 
+    method='post',  # 选择post
+    headers=self.headers,
+    dont_filter=True, # 关闭去重
+    body=post_data, # post 数据根据情况 选择是  dict类型: data / json字符串类型: json.dumps(data)
+    callback=self.parse_page)
 ```
