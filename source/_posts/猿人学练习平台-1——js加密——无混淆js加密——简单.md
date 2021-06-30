@@ -101,7 +101,7 @@ import hashlib
 import base64
 
 count_zhao = 0
-for page in range(1,3):
+for page in range(1,86):
     cookies1 = {
         'Hm_lvt_337e99a01a907a08d00bed4a1a52e35d': '1623315686',
         'vaptchaNetwayTime': str(int(time.time())),
