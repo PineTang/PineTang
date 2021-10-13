@@ -61,6 +61,7 @@ console.log(document)
 > 可以看到，已经没有报错了，但是并没有在全局变量中拿到值，根据分析 第二次响应内容种的代码，发现他使用了setTimeout 函数
 ![img](https://gitee.com/PineKer/myfiles/raw/master/blog/20211013100136_11.png)
 > setTimeout 函数的作用是将一个方法，在延时一段时间后执行，它的第一个参数就是需要执行的内容，这里可以将setTimeout 函数重写，然后将接收到的需要执行的方法，在全局中执行，那么 setTimeout 里 cookie 赋值的操作，就暴露给全局，就能拿到了
+
 ![img](https://gitee.com/PineKer/myfiles/raw/master/blog/20211013100136_12.png)
 
 > 在添加重写的 setTimeout 后，就轻松的拿到了想要的结果，至此，js 逆向工作全部结束
