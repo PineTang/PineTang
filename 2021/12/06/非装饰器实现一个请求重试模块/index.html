@@ -16,7 +16,7 @@
 <meta property="og:description" content="通过反射和无名参数实现 代码  import requests  def retryRequest(req_type&#x3D;&#39;get&#39;, retry_type&#x3D;1, **kwargs):     &#39;&#39;&#39;     req_type: 请求类型  get&#x2F;post     retry_type: 重试次数， &gt;&#x3D;1时按传参次数；&#x3D;&#x3D;0时开启无限重试至成功     kwargs: 不定数量动态参数     &#39;">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-12-06T10:20:22.000Z">
-<meta property="article:modified_time" content="2021-12-06T10:23:17.359Z">
+<meta property="article:modified_time" content="2021-12-08T06:52:12.561Z">
 <meta property="article:author" content="Tangs">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -593,7 +593,7 @@
 						
 						<div class="post-meta-detail post-meta-detail-time">
 							<i class="fa fa-clock-o" aria-hidden="true"></i>
-							<time title="发布于 2021-12-6 18:20:22 | 编辑于 2021-12-6 18:23:17">2021-12-6 18:20
+							<time title="发布于 2021-12-6 18:20:22 | 编辑于 2021-12-8 14:52:12">2021-12-6 18:20
 							</time>
 						</div>
 					
@@ -620,7 +620,7 @@
 						
 						<div class="post-meta-detail post-meta-detail-words">
 							<i class="fa fa-file-word-o" aria-hidden="true"></i>
-							132 字
+							157 字
 						</div>
 					
 						
@@ -653,8 +653,13 @@
         <span class="token keyword">try</span><span class="token punctuation">:</span>
             response <span class="token operator">=</span> <span class="token builtin">getattr</span><span class="token punctuation">(</span>requests<span class="token punctuation">,</span> req_type<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token operator">**</span>kwargs<span class="token punctuation">)</span>  <span class="token comment"># 通过反射动态调用函数</span>
             <span class="token keyword">if</span> response<span class="token punctuation">.</span>status_code <span class="token operator">==</span> <span class="token number">200</span><span class="token punctuation">:</span> <span class="token keyword">return</span> response<span class="token punctuation">,</span> <span class="token boolean">True</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span> <span class="token keyword">return</span> response<span class="token punctuation">,</span> <span class="token boolean">False</span>  <span class="token comment"># 非 200 响应，则继续重试</span>
         <span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span>
-            <span class="token keyword">print</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> response<span class="token punctuation">)</span>
+            <span class="token keyword">try</span><span class="token punctuation">:</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> response<span class="token punctuation">)</span>
+            <span class="token keyword">except</span><span class="token punctuation">:</span>
+                response <span class="token operator">=</span> <span class="token string">"requests 请求未完成"</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> response<span class="token punctuation">)</span>
             <span class="token keyword">return</span> response<span class="token punctuation">,</span> <span class="token boolean">False</span>
 
     <span class="token keyword">if</span> retry_type<span class="token punctuation">:</span>
@@ -670,7 +675,7 @@
 
     <span class="token keyword">return</span> response
 
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 	</div>
 
 	
