@@ -3,23 +3,42 @@
 <html class="use-big-shadow article-header-style-default">
 <head>
 	
-	<title>非装饰器实现一个请求重试模块 - 程序BUG猿</title>
+	<title>headers签名逆向 - 程序BUG猿</title>
 	<meta charset="utf-8">
 	
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	
-	<meta name="description" content="通过反射和无名参数实现 代码  import requests  def retryRequest(req_type&#x3D;&#39;get&#39;, retry_type&#x3D;1, sleep_sec&#x3D;1,**kwargs):     &#39;&#39;&#39;     req_type: 请求类型  get&#x2F;post     retry_type: 重试次数， &gt;&#x3D;1时按传参次数；&#x3D;&#x3D;0时开启无限重试至成功     sleep_sec:">
+	<meta name="description" content="分析查看请求相关信息 查看请求流程 变化的参数有两个，主要是 authorization     先看看调用堆栈信息，可以发现主要是 ROHReact.js 和 VM   先去搜一下关键字 authorization；可以发现一个是 string 类型的一段js代码；另一个是调用堆栈里的那个js文件，先从字符串代码开始跟踪，个人也是人为可能性大一点   搜索这段代码的变量名，可以找到 使用 eva">
 <meta property="og:type" content="article">
-<meta property="og:title" content="非装饰器实现一个请求重试模块">
-<meta property="og:url" content="https://pinetang.github.io.git/2021/12/06/%E9%9D%9E%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%AF%B7%E6%B1%82%E9%87%8D%E8%AF%95%E6%A8%A1%E5%9D%97/index.html">
+<meta property="og:title" content="headers签名逆向">
+<meta property="og:url" content="https://pinetang.github.io.git/2021/12/13/headers%E7%AD%BE%E5%90%8D%E9%80%86%E5%90%91/index.html">
 <meta property="og:site_name" content="程序BUG猿">
-<meta property="og:description" content="通过反射和无名参数实现 代码  import requests  def retryRequest(req_type&#x3D;&#39;get&#39;, retry_type&#x3D;1, sleep_sec&#x3D;1,**kwargs):     &#39;&#39;&#39;     req_type: 请求类型  get&#x2F;post     retry_type: 重试次数， &gt;&#x3D;1时按传参次数；&#x3D;&#x3D;0时开启无限重试至成功     sleep_sec:">
+<meta property="og:description" content="分析查看请求相关信息 查看请求流程 变化的参数有两个，主要是 authorization     先看看调用堆栈信息，可以发现主要是 ROHReact.js 和 VM   先去搜一下关键字 authorization；可以发现一个是 string 类型的一段js代码；另一个是调用堆栈里的那个js文件，先从字符串代码开始跟踪，个人也是人为可能性大一点   搜索这段代码的变量名，可以找到 使用 eva">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-12-06T10:20:22.000Z">
-<meta property="article:modified_time" content="2021-12-08T06:55:48.951Z">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_1.png">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_2.png">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_3.png">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_4.png">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_5.png">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_6.png">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_7.png">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_8.png">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_9.png">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_10.png">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_11.png">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_12.png">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_13.png">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_14.png">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_15.png">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_16.png">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_17.png">
+<meta property="article:published_time" content="2021-12-13T06:57:54.000Z">
+<meta property="article:modified_time" content="2021-12-13T08:38:55.653Z">
 <meta property="article:author" content="Tangs">
-<meta property="article:tag" content="Python">
+<meta property="article:tag" content="js逆向">
+<meta property="article:tag" content="逆向思路">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_1.png">
 
 	<meta name="theme-color" content="#C53D85">
 	<meta name="theme-color-rgb" content="197,61,133">
@@ -585,15 +604,18 @@
 		
 			
 	<article class="post post-full card bg-white shadow-sm border-0 post-preview">
-	<header class="post-header text-center">
+	<header class="post-header text-center post-header-with-thumbnail">
 		
-		<a class="post-title" href="/2021/12/06/%E9%9D%9E%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%AF%B7%E6%B1%82%E9%87%8D%E8%AF%95%E6%A8%A1%E5%9D%97/">非装饰器实现一个请求重试模块</a>
+				<img class='post-thumbnail lazyload' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABBJREFUeNpi+P//PwNAgAEACPwC/tuiTRYAAAAASUVORK5CYII=' data-original='https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_1.png' alt='thumbnail'></img>
+				<div class='post-header-text-container'>
+			
+		<a class="post-title" href="/2021/12/13/headers%E7%AD%BE%E5%90%8D%E9%80%86%E5%90%91/">headers签名逆向</a>
 		<div class="post-meta">
 			
 						
 						<div class="post-meta-detail post-meta-detail-time">
 							<i class="fa fa-clock-o" aria-hidden="true"></i>
-							<time title="发布于 2021-12-6 18:20:22 | 编辑于 2021-12-8 14:55:48">2021-12-6 18:20
+							<time title="发布于 2021-12-13 14:57:54 | 编辑于 2021-12-13 16:38:55">2021-12-13 14:57
 							</time>
 						</div>
 					
@@ -602,7 +624,7 @@
 						
 						<div class="post-meta-detail post-meta-detail-categories">
 							<i class="fa fa-bookmark-o" aria-hidden="true"></i>
-							<a class="post-meta-detail-catagory-link" href="/categories/Python/">Python</a>
+							<a class="post-meta-detail-catagory-link" href="/categories/%E5%8F%8D%E7%88%AC/">反爬</a>
 						</div>
 					
 						
@@ -620,7 +642,7 @@
 						
 						<div class="post-meta-detail post-meta-detail-words">
 							<i class="fa fa-file-word-o" aria-hidden="true"></i>
-							165 字
+							711 字
 						</div>
 					
 						
@@ -628,55 +650,158 @@
 						
 						<div class="post-meta-detail post-meta-detail-readingtime">
 							<i class="fa fa-hourglass-end" aria-hidden="true"></i>
-							1 分钟
+							7 分钟
 						</div>
 					
 		</div>
 		
+				</div>
+			
 	</header>
 
 	<div class="post-content" id="post_content">
-		<h2 id="通过反射和无名参数实现"><a href="#通过反射和无名参数实现" class="headerlink" title="通过反射和无名参数实现"></a>通过反射和无名参数实现</h2><blockquote>
-<p>代码</p>
+		<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><h3 id="查看请求相关信息"><a href="#查看请求相关信息" class="headerlink" title="查看请求相关信息"></a>查看请求相关信息</h3><ol>
+<li>查看请求流程<blockquote>
+<p>变化的参数有两个，主要是 authorization<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_1.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
+
 </blockquote>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> requests
+</li>
+</ol>
+<blockquote>
+<p>先看看调用堆栈信息，可以发现主要是 ROHReact.js 和 VM<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_2.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
 
-<span class="token keyword">def</span> <span class="token function">retryRequest</span><span class="token punctuation">(</span>req_type<span class="token operator">=</span><span class="token string">'get'</span><span class="token punctuation">,</span> retry_type<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> sleep_sec<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token triple-quoted-string string">'''
-    req_type: 请求类型  get/post
-    retry_type: 重试次数， >=1时按传参次数；==0时开启无限重试至成功
-    sleep_sec: 重试间隔，单位/秒
-    kwargs: 不定数量动态参数
-    '''</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>kwargs<span class="token punctuation">)</span>
+</blockquote>
+<blockquote>
+<p>先去搜一下关键字 authorization；可以发现一个是 string 类型的一段js代码；另一个是调用堆栈里的那个js文件，<br>先从字符串代码开始跟踪，个人也是人为可能性大一点<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_3.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
 
-    <span class="token keyword">def</span> <span class="token function">try_except</span><span class="token punctuation">(</span>req_type<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">try</span><span class="token punctuation">:</span>
-            response <span class="token operator">=</span> <span class="token builtin">getattr</span><span class="token punctuation">(</span>requests<span class="token punctuation">,</span> req_type<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token operator">**</span>kwargs<span class="token punctuation">)</span>  <span class="token comment"># 通过反射动态调用函数</span>
-            <span class="token keyword">if</span> response<span class="token punctuation">.</span>status_code <span class="token operator">==</span> <span class="token number">200</span><span class="token punctuation">:</span> <span class="token keyword">return</span> response<span class="token punctuation">,</span> <span class="token boolean">True</span>
-            <span class="token keyword">else</span><span class="token punctuation">:</span> <span class="token keyword">return</span> response<span class="token punctuation">,</span> <span class="token boolean">False</span>  <span class="token comment"># 非 200 响应，则继续重试</span>
-        <span class="token keyword">except</span> Exception <span class="token keyword">as</span> e<span class="token punctuation">:</span>
-            <span class="token keyword">try</span><span class="token punctuation">:</span>
-                <span class="token keyword">print</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> response<span class="token punctuation">)</span>
-            <span class="token keyword">except</span><span class="token punctuation">:</span>
-                response <span class="token operator">=</span> <span class="token string">"requests 请求未完成"</span>
-                <span class="token keyword">print</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> response<span class="token punctuation">)</span>
-            <span class="token keyword">return</span> response<span class="token punctuation">,</span> <span class="token boolean">False</span>
+</blockquote>
+<blockquote>
+<p>搜索这段代码的变量名，可以找到 使用 eval 执行他的地方，打赏断点，跟进去调试<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_4.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
 
-    <span class="token keyword">if</span> retry_type<span class="token punctuation">:</span>
-        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>retry_type<span class="token punctuation">)</span><span class="token punctuation">:</span>
-            response<span class="token punctuation">,</span> req_statu <span class="token operator">=</span> try_except<span class="token punctuation">(</span>req_type<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>
-            <span class="token keyword">if</span> req_statu<span class="token punctuation">:</span> <span class="token keyword">break</span>
-            time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span>sleep_sec<span class="token punctuation">)</span>
-    <span class="token keyword">else</span><span class="token punctuation">:</span>
-        <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
-            response<span class="token punctuation">,</span> req_statu <span class="token operator">=</span> try_except<span class="token punctuation">(</span>req_type<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>
-            <span class="token keyword">if</span> req_statu<span class="token punctuation">:</span> <span class="token keyword">break</span>
-            time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span>sleep_sec<span class="token punctuation">)</span>
+</blockquote>
+<blockquote>
+<p>可以看到成功断住了，单步跟下去<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_5.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
 
-    <span class="token keyword">return</span> response
+</blockquote>
+<blockquote>
+<p>跟进去之后发现了关键字<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_6.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
 
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</blockquote>
+<blockquote>
+<p>并且经过搜索找到了下方的引用位置，打上断点，执行到这个位置，发现赋值就在这里；<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_7.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
+
+</blockquote>
+<h3 id="分析动态参数"><a href="#分析动态参数" class="headerlink" title="分析动态参数"></a>分析动态参数</h3><ol>
+<li><p>扣出代码</p>
+<blockquote>
+<p>把刚才跟进去的那个文件代码，全部复制到本地, 并在 headers 赋值后的地方输出一下，<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_8.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
+
+</blockquote>
+</li>
+<li><p>调试</p>
+<blockquote>
+<p>整理一下，主动调用这段代码，并从 debug 中把需要的 config 参数复制出来;<br>然后执行发现报错 Cannot read property ‘assertDefined’ of undefined<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_9.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
+
+</blockquote>
+</li>
+</ol>
+<p><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_10.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
+
+<ol start="3">
+<li><p>继续扣代码</p>
+<blockquote>
+<p>选中目标代码，然后点进去，然后添加到本地文件中<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_11.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
+
+</blockquote>
+</li>
+<li><p>再次调试</p>
+<blockquote>
+<p>将复制进来的代码整理，去掉重复的变量声明字段，再次执行，出现 document is not defined<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_12.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
+
+</blockquote>
+</li>
+<li><p>排查错误</p>
+<blockquote>
+<p>发现只有一处引用，并且只是获取了一下 hostname，那么直接写死就完事, 把 document 的地方注释掉<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_13.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
+
+</blockquote>
+</li>
+</ol>
+<p><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_14.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
+
+<ol start="6">
+<li><p>使用 node 的 CryptoJS</p>
+<blockquote>
+<p>再次执行缺少加解密库，可以直接安装 <code>npm install crypto-js</code> , 然后再引用就 OK<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_15.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
+
+</blockquote>
+</li>
+<li><p>收尾</p>
+<blockquote>
+<p>再次执行出现 axios is not defined 错误，搜索定位到返回值是 <code>return axios(signedRequest);</code>，<br>我们不需要封装请求，毕竟上方可以看到，已经成功输出 headers 中我们需要的值，所以 直击返回就好 <code>return signedRequest</code><br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_16.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
+
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>完结撒花<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211213151406_17.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
+
+</blockquote>
+<h3 id="分析总结"><a href="#分析总结" class="headerlink" title="分析总结"></a>分析总结</h3><blockquote>
+<p>根据搜索定位到关键参数位置，发现对方使用 eval 去执行的相关代码，找到 eval 执行位置，断点跟进去，确认参数生成位置，扣代码<br>根据扣下来的代码，补环境，补参数，整理不需要的部分（axios， document）<br>安装加密库 crypto-js<br>为了方便使用 python 调用，将 js 文件倒数第二行改为 <code>var signedRequest = awsSigV4Client.makeRequest</code></p>
+</blockquote>
+<h2 id="代码验证"><a href="#代码验证" class="headerlink" title="代码验证"></a>代码验证</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> execjs
+<span class="token keyword">import</span> os
+<span class="token keyword">import</span> requests
+BASE_DIR <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>dirname<span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>realpath<span class="token punctuation">(</span><span class="token string">'__file__'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">'\\'</span><span class="token punctuation">,</span> <span class="token string">r'/'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">&#123;</span>BASE_DIR<span class="token punctuation">&#125;</span></span><span class="token string">/blog.js"</span></span><span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+    js_code <span class="token operator">=</span> f<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+js_env <span class="token operator">=</span> execjs<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span>
+js_complied <span class="token operator">=</span> js_env<span class="token punctuation">.</span><span class="token builtin">compile</span><span class="token punctuation">(</span>js_code<span class="token punctuation">)</span>
+request <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token string">"verb"</span><span class="token punctuation">:</span> <span class="token string">"GET"</span><span class="token punctuation">,</span>
+    <span class="token string">"path"</span><span class="token punctuation">:</span> <span class="token string">"/roh/army/sbv"</span><span class="token punctuation">,</span>
+    <span class="token string">"headers"</span><span class="token punctuation">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token string">"queryParams"</span><span class="token punctuation">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"Person"</span><span class="token punctuation">,</span>
+        <span class="token string">"ID"</span><span class="token punctuation">:</span> <span class="token string">"10015"</span><span class="token punctuation">,</span>
+        <span class="token string">"version"</span><span class="token punctuation">:</span> <span class="token string">"2.00"</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+rst <span class="token operator">=</span> js_complied<span class="token punctuation">.</span>call<span class="token punctuation">(</span><span class="token string">'signedRequest'</span><span class="token punctuation">,</span> request<span class="token punctuation">)</span>
+
+headers <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment"># 'authority': '2te05r2hbk.execute-api.us-east-1.amazonaws.com',</span>
+    <span class="token string">'pragma'</span><span class="token punctuation">:</span> <span class="token string">'no-cache'</span><span class="token punctuation">,</span>
+    <span class="token string">'cache-control'</span><span class="token punctuation">:</span> <span class="token string">'no-cache'</span><span class="token punctuation">,</span>
+    <span class="token string">'sec-ch-ua'</span><span class="token punctuation">:</span> <span class="token string">'" Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"'</span><span class="token punctuation">,</span>
+    <span class="token string">'accept'</span><span class="token punctuation">:</span> <span class="token string">'application/json'</span><span class="token punctuation">,</span>
+    <span class="token string">'authorization'</span><span class="token punctuation">:</span> <span class="token string">'AWS4-HMAC-SHA256 Credential=AKIAQJFZ7KCKQ5RKEVFL/20211210/us-east-1/execute-api/aws4_request, SignedHeaders=accept;host;x-amz-date, Signature=68b3238747d919ac607c2db288bb893d784b91d2cce93d3ca973405281976837'</span><span class="token punctuation">,</span>
+    <span class="token string">'x-amz-date'</span><span class="token punctuation">:</span> <span class="token string">'20211210T095518Z'</span><span class="token punctuation">,</span>
+    <span class="token string">'sec-ch-ua-mobile'</span><span class="token punctuation">:</span> <span class="token string">'?0'</span><span class="token punctuation">,</span>
+    <span class="token string">'user-agent'</span><span class="token punctuation">:</span> <span class="token string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.55 Safari/537.36'</span><span class="token punctuation">,</span>
+    <span class="token string">'sec-ch-ua-platform'</span><span class="token punctuation">:</span> <span class="token string">'"macOS"'</span><span class="token punctuation">,</span>
+    <span class="token string">'origin'</span><span class="token punctuation">:</span> <span class="token string">'https://army.togetherweserved.com'</span><span class="token punctuation">,</span>
+    <span class="token string">'sec-fetch-site'</span><span class="token punctuation">:</span> <span class="token string">'cross-site'</span><span class="token punctuation">,</span>
+    <span class="token string">'sec-fetch-mode'</span><span class="token punctuation">:</span> <span class="token string">'cors'</span><span class="token punctuation">,</span>
+    <span class="token string">'sec-fetch-dest'</span><span class="token punctuation">:</span> <span class="token string">'empty'</span><span class="token punctuation">,</span>
+    <span class="token string">'referer'</span><span class="token punctuation">:</span> <span class="token string">'https://army.togetherweserved.com/'</span><span class="token punctuation">,</span>
+    <span class="token string">'accept-language'</span><span class="token punctuation">:</span> <span class="token string">'zh-CN,zh;q=0.9'</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span>
+
+params <span class="token operator">=</span> <span class="token punctuation">(</span>
+    <span class="token punctuation">(</span><span class="token string">'ID'</span><span class="token punctuation">,</span> <span class="token string">'10015'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">(</span><span class="token string">'type'</span><span class="token punctuation">,</span> <span class="token string">'Person'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">(</span><span class="token string">'version'</span><span class="token punctuation">,</span> <span class="token string">'2.00'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+headers<span class="token punctuation">[</span><span class="token string">'authorization'</span><span class="token punctuation">]</span> <span class="token operator">=</span> rst<span class="token punctuation">[</span><span class="token string">'headers'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'Authorization'</span><span class="token punctuation">]</span>
+headers<span class="token punctuation">[</span><span class="token string">'x-amz-date'</span><span class="token punctuation">]</span> <span class="token operator">=</span> rst<span class="token punctuation">[</span><span class="token string">'headers'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'x-amz-date'</span><span class="token punctuation">]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>headers<span class="token punctuation">)</span>
+
+response <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'https://2te05r2hbk.execute-api.us-east-1.amazonaws.com/roh/army/sbv'</span><span class="token punctuation">,</span> headers<span class="token operator">=</span>headers<span class="token punctuation">,</span> params<span class="token operator">=</span>params<span class="token punctuation">)</span>
+response<span class="token punctuation">.</span>json<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 	</div>
 
 	
@@ -686,7 +811,7 @@
 	
 		<div class="post-tags">
 			<i class="fa fa-tags" aria-hidden="true"></i>
-			<a class="tag badge badge-secondary post-meta-detail-tag -none-link" href="/tags/Python/" rel="tag">Python</a>
+			<a class="tag badge badge-secondary post-meta-detail-tag -none-link" href="/tags/js%E9%80%86%E5%90%91/" rel="tag">js逆向</a><a class="tag badge badge-secondary post-meta-detail-tag -none-link" href="/tags/%E9%80%86%E5%90%91%E6%80%9D%E8%B7%AF/" rel="tag">逆向思路</a>
 		</div>
 	
 </article>
@@ -728,7 +853,7 @@
 				<span class="btn-inner--icon"><i class="fa fa-twitter"></i></span>
 			</button>
 		</a>
-		<a target="_blank" class="no-pjax icon-telegram" href="https://telegram.me/share/url?url=https://pinetang.github.io.git/2021/12/06/%E9%9D%9E%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%AF%B7%E6%B1%82%E9%87%8D%E8%AF%95%E6%A8%A1%E5%9D%97/&text=非装饰器实现一个请求重试模块" tooltip="分享到 Telegram">
+		<a target="_blank" class="no-pjax icon-telegram" href="https://telegram.me/share/url?url=https://pinetang.github.io.git/2021/12/13/headers%E7%AD%BE%E5%90%8D%E9%80%86%E5%90%91/&text=headers签名逆向" tooltip="分享到 Telegram">
 			<button class="btn btn-icon btn-primary" style="background: #42a5f5;border: none;">
 				<span class="btn-inner--icon"><i class="fa fa-telegram"></i></span>
 			</button>
@@ -745,16 +870,18 @@
 </div>
 <script type="text/javascript">
 	socialShare("#share", {
-	    title : '非装饰器实现一个请求重试模块',
-	    description : '通过反射和无名参数实现
-代码
+	    title : 'headers签名逆向',
+	    description : '分析查看请求相关信息
+查看请求流程
+变化的参数有两个，主要是 authorization
 
-import requests
 
-def retryRequest(...',
+
+
+先...',
 	    wechatQrcodeTitle : "分享到微信",
 	    wechatQrcodeHelper : '微信扫描二维码',
-	    source : 'https://pinetang.github.io.git/2021/12/06/%E9%9D%9E%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%AF%B7%E6%B1%82%E9%87%8D%E8%AF%95%E6%A8%A1%E5%9D%97/'
+	    source : 'https://pinetang.github.io.git/2021/12/13/headers%E7%AD%BE%E5%90%8D%E9%80%86%E5%90%91/'
 	});
 	$("#share_show")[0].onclick = function(){
 		$("#share_container").addClass("opened");
@@ -818,7 +945,7 @@ def retryRequest(...',
 </div>
 
 
-<div class="post-navigation card shadow-sm"><div class="post-navigation-item post-navigation-pre"><span class="page-navigation-extra-text"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>上一篇</span><a href="/2021/12/13/headers%E7%AD%BE%E5%90%8D%E9%80%86%E5%90%91/" rel="prev"> headers签名逆向</a></div><div class="post-navigation-item post-navigation-next"><span class="page-navigation-extra-text">下一篇 <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span><a href="/2021/10/13/jsl%E7%9A%84cookie%E9%80%86%E5%90%91%EF%BC%8C%E6%A0%87%E5%87%86%E6%A1%88%E4%BE%8B/" rel="next"> jsl的cookie逆向，标准案例</a></div></div>
+<div class="post-navigation card shadow-sm"><div class="post-navigation-item post-navigation-pre"></div><div class="post-navigation-item post-navigation-next"><span class="page-navigation-extra-text">下一篇 <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span><a href="/2021/12/06/%E9%9D%9E%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%AF%B7%E6%B1%82%E9%87%8D%E8%AF%95%E6%A8%A1%E5%9D%97/" rel="next"> 非装饰器实现一个请求重试模块</a></div></div>
 
 
 
