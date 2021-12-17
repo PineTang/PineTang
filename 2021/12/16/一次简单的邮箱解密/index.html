@@ -3,33 +3,33 @@
 <html class="use-big-shadow article-header-style-default">
 <head>
 	
-	<title>猿人学练习平台 2——js加密——简易动态js加密解析——简单 - 程序BUG猿</title>
+	<title>一次简单的邮箱解密 - 程序BUG猿</title>
 	<meta charset="utf-8">
 	
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	
-	<meta name="description" content="题目地址 分析查看请求信息 刷新页面会，打开控制台会无限 debugger，把它过掉  然后再次刷新就正常了  经过尝试，会发现在第一个请求的时候，cookie 中的 sign 值就已经在请求头了，所以应该是本地计算完成的，接下来就是找到计算的位置    定位 一般我会用 XHR 断点，但是这里不属于 XHR 请求方式，所以直接下 script事件监听断点   为了方便查看，断点下好后，先去 co">
+	<meta name="description" content="分析查看请求相关信息 愉快的做着 Xpath 工程师，以及灵活的 Ctrl C、Ctrl V，突然就不灵了，一看响应邮箱地址被加密了。   查看原始请求响应  发现邮箱的地方，提示开启 js，并且标签属性 data-spamprotect 的值像是待解密的数据   查看 js 执行位置  根据以往的经验，应该是在某个地方获取 data-spamprotect 的属性值，然后解密，所以直接以它为关键">
 <meta property="og:type" content="article">
-<meta property="og:title" content="猿人学练习平台 2——js加密——简易动态js加密解析——简单">
-<meta property="og:url" content="https://pinetang.github.io.git/2021/07/01/%E7%8C%BF%E4%BA%BA%E5%AD%A6%E7%BB%83%E4%B9%A0%E5%B9%B3%E5%8F%B0-2%E2%80%94%E2%80%94js%E5%8A%A0%E5%AF%86%E2%80%94%E2%80%94%E7%AE%80%E6%98%93%E5%8A%A8%E6%80%81js%E5%8A%A0%E5%AF%86%E8%A7%A3%E6%9E%90%E2%80%94%E2%80%94%E7%AE%80%E5%8D%95/index.html">
+<meta property="og:title" content="一次简单的邮箱解密">
+<meta property="og:url" content="https://pinetang.github.io.git/2021/12/16/%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E9%82%AE%E7%AE%B1%E8%A7%A3%E5%AF%86/index.html">
 <meta property="og:site_name" content="程序BUG猿">
-<meta property="og:description" content="题目地址 分析查看请求信息 刷新页面会，打开控制台会无限 debugger，把它过掉  然后再次刷新就正常了  经过尝试，会发现在第一个请求的时候，cookie 中的 sign 值就已经在请求头了，所以应该是本地计算完成的，接下来就是找到计算的位置    定位 一般我会用 XHR 断点，但是这里不属于 XHR 请求方式，所以直接下 script事件监听断点   为了方便查看，断点下好后，先去 co">
+<meta property="og:description" content="分析查看请求相关信息 愉快的做着 Xpath 工程师，以及灵活的 Ctrl C、Ctrl V，突然就不灵了，一看响应邮箱地址被加密了。   查看原始请求响应  发现邮箱的地方，提示开启 js，并且标签属性 data-spamprotect 的值像是待解密的数据   查看 js 执行位置  根据以往的经验，应该是在某个地方获取 data-spamprotect 的属性值，然后解密，所以直接以它为关键">
 <meta property="og:locale">
-<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20210701143216_1.png">
-<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20210701144107_2.png">
-<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20210701144359_3.png">
-<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20210701144854_4.png">
-<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20210701145226_5.png">
-<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20210701150119_6.png">
-<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20210701150358_7.png">
-<meta property="article:published_time" content="2021-07-01T06:06:07.000Z">
-<meta property="article:modified_time" content="2021-08-08T11:37:53.948Z">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211216175532_1.png">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211216175532_2.png">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211216175532_3.png">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211216175532_4.png">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211216175532_5.png">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211216175532_6.png">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211216175532_7.png">
+<meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211216175532_8.png">
+<meta property="article:published_time" content="2021-12-16T09:43:01.000Z">
+<meta property="article:modified_time" content="2021-12-17T02:48:40.891Z">
 <meta property="article:author" content="Tangs">
 <meta property="article:tag" content="js逆向">
 <meta property="article:tag" content="逆向思路">
-<meta property="article:tag" content="猿人学">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20210701143216_1.png">
+<meta name="twitter:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20211216175532_1.png">
 
 	<meta name="theme-color" content="#C53D85">
 	<meta name="theme-color-rgb" content="197,61,133">
@@ -597,16 +597,16 @@
 	<article class="post post-full card bg-white shadow-sm border-0 post-preview">
 	<header class="post-header text-center post-header-with-thumbnail">
 		
-				<img class='post-thumbnail lazyload' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABBJREFUeNpi+P//PwNAgAEACPwC/tuiTRYAAAAASUVORK5CYII=' data-original='https://gitee.com/PineKer/myfiles/raw/master/blog/20210701143216_1.png' alt='thumbnail'></img>
+				<img class='post-thumbnail lazyload' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABBJREFUeNpi+P//PwNAgAEACPwC/tuiTRYAAAAASUVORK5CYII=' data-original='https://gitee.com/PineKer/myfiles/raw/master/blog/20211216175532_1.png' alt='thumbnail'></img>
 				<div class='post-header-text-container'>
 			
-		<a class="post-title" href="/2021/07/01/%E7%8C%BF%E4%BA%BA%E5%AD%A6%E7%BB%83%E4%B9%A0%E5%B9%B3%E5%8F%B0-2%E2%80%94%E2%80%94js%E5%8A%A0%E5%AF%86%E2%80%94%E2%80%94%E7%AE%80%E6%98%93%E5%8A%A8%E6%80%81js%E5%8A%A0%E5%AF%86%E8%A7%A3%E6%9E%90%E2%80%94%E2%80%94%E7%AE%80%E5%8D%95/">猿人学练习平台 2——js加密——简易动态js加密解析——简单</a>
+		<a class="post-title" href="/2021/12/16/%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E9%82%AE%E7%AE%B1%E8%A7%A3%E5%AF%86/">一次简单的邮箱解密</a>
 		<div class="post-meta">
 			
 						
 						<div class="post-meta-detail post-meta-detail-time">
 							<i class="fa fa-clock-o" aria-hidden="true"></i>
-							<time title="发布于 2021-7-1 14:06:07 | 编辑于 2021-8-8 19:37:53">2021-7-1 14:06
+							<time title="发布于 2021-12-16 17:43:01 | 编辑于 2021-12-17 10:48:40">2021-12-16 17:43
 							</time>
 						</div>
 					
@@ -615,7 +615,7 @@
 						
 						<div class="post-meta-detail post-meta-detail-categories">
 							<i class="fa fa-bookmark-o" aria-hidden="true"></i>
-							<a class="post-meta-detail-catagory-link" href="/categories/%E7%8C%BF%E4%BA%BA%E5%AD%A6/">猿人学</a>
+							<a class="post-meta-detail-catagory-link" href="/categories/%E5%8F%8D%E7%88%AC/">反爬</a>
 						</div>
 					
 						
@@ -633,7 +633,7 @@
 						
 						<div class="post-meta-detail post-meta-detail-words">
 							<i class="fa fa-file-word-o" aria-hidden="true"></i>
-							983 字
+							583 字
 						</div>
 					
 						
@@ -641,7 +641,7 @@
 						
 						<div class="post-meta-detail post-meta-detail-readingtime">
 							<i class="fa fa-hourglass-end" aria-hidden="true"></i>
-							9 分钟
+							5 分钟
 						</div>
 					
 		</div>
@@ -651,103 +651,114 @@
 	</header>
 
 	<div class="post-content" id="post_content">
-		<p><a target="_blank" rel="noopener" href="https://www.python-spider.com/challenge/2">题目地址</a></p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><h3 id="查看请求信息"><a href="#查看请求信息" class="headerlink" title="查看请求信息"></a>查看请求信息</h3><ol>
-<li><p>刷新页面会，打开控制台会无限 debugger，把它过掉<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20210701143216_1.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
-
-</li>
-<li><p>然后再次刷新就正常了</p>
+		<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><h3 id="查看请求相关信息"><a href="#查看请求相关信息" class="headerlink" title="查看请求相关信息"></a>查看请求相关信息</h3><blockquote>
+<p>愉快的做着 Xpath 工程师，以及灵活的 Ctrl C、Ctrl V，突然就不灵了，一看响应邮箱地址被加密了。</p>
+</blockquote>
+<ol>
+<li><p>查看原始请求响应</p>
 <blockquote>
-<p>经过尝试，会发现在第一个请求的时候，<code>cookie</code> 中的 <code>sign</code> 值就已经在请求头了，所以应该是本地计算完成的，<br>接下来就是找到计算的位置</p>
+<p>发现邮箱的地方，提示开启 js，并且标签属性 data-spamprotect 的值像是待解密的数据<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211216175532_1.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
+
+</blockquote>
+</li>
+<li><p>查看 js 执行位置</p>
+<blockquote>
+<p>根据以往的经验，应该是在某个地方获取 data-spamprotect 的属性值，然后解密，所以直接以它为关键字进行搜索，<br>除了一些静态文本，只有一个 js 文件出现了这个关键词，点进去<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211216175532_2.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
+
 </blockquote>
 </li>
 </ol>
-<h3 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h3><blockquote>
-<p>一般我会用 XHR 断点，但是这里不属于 XHR 请求方式，所以直接下 script事件监听断点<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20210701144107_2.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
+<blockquote>
+<p>在这个位置下个端点，然后刷新页面，成功断住了，然后不停的单步调试，直到邮箱地址出现<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211216175532_3.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
 
 </blockquote>
 <blockquote>
-<p>为了方便查看，断点下好后，先去 <code>cookies</code> 里把 <code>sign</code> 给删掉，<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20210701144359_3.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
+<p>经过 N 次 F11 后，邮箱地址终于出现了；<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211216175532_4.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
 
 </blockquote>
 <blockquote>
-<p>然后就可以刷新页面开始调试了，就这样走一次 F8 看一下cookie 变化（也可以直接hook cookie 就没这么麻烦），留意每次调试的文件有用<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20210701144854_4.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
+<p>将调用堆栈跳到上一步，这个 o 函数执行前的状态，看一下参数<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211216175532_5.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
 
 </blockquote>
 <blockquote>
-<p>在经过一次卡顿后，出现了目标，并且上方调试时走过的文件也没了，<br>这样我们没法回到上一次（堆栈也没有啊），所以刚刚提示的留意就派上用场了<br>知道在什么位置了，那么就重新操作一遍，删除 cookie sign 刷新页面<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20210701145226_5.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
+<p>在控制台看看两个参数是啥，发现不知道是个啥，但是在上方找到了赋值的地方；简单分析后，都是根据<code>t.data(&quot;spamprotect&quot;)</code>计算得到的，<br>而这个值，就是待解密的响应标签中的属性值<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211216175532_6.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
 
 </blockquote>
 <blockquote>
-<p>经过再次调试，来到了cookie变化前一个断点文件<br>格式化之后，搜一下cookie，看了看，因该就是这块的了<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20210701150119_6.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
+<p>将代码抠出整理，把动态获取密文，写死试试，发现能成功计算完成<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211216175532_7.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
 
 </blockquote>
+<h3 id="本地调试-amp-python还原"><a href="#本地调试-amp-python还原" class="headerlink" title="本地调试 &amp; python还原"></a>本地调试 &amp; <code>python</code>还原</h3><ol>
+<li><p>扣出代码，本地调试</p>
 <blockquote>
-<p>下个断点，看一下，这就是需要的 <code>sign</code> 了，到这里，答案已经可以出来了，把 <code>c</code> 的值改为题目的时间戳, 再依次执行就可以了<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20210701150358_7.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
+<p>直接把<code>function o()</code>的内容抠出，并去除不参与计算的部分；然后用 node 自带的 base64 方法手动去补充 atob 这样的函数；<br><img class="lazyload lazyload-style-1" src="data:image/svg+xml;base64,PCEtLUFyZ29uTG9hZGluZy0tPgo8c3ZnIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgc3Ryb2tlPSIjZmZmZmZmMDAiPjxnPjwvZz4KPC9zdmc+"  data-original="https://gitee.com/PineKer/myfiles/raw/master/blog/20211216175532_8.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" alt="img"></p>
 
 </blockquote>
+</li>
+<li><p>python 还原</p>
 <blockquote>
-<p>不过为了学习，我们还是把它用<code>python</code>还原一下,下边先对这几行代码进行逐步分析</p>
+<p>把 js 翻译一遍，需注意部分有注释</p>
 </blockquote>
-<h3 id="分析cookie参数"><a href="#分析cookie参数" class="headerlink" title="分析cookie参数"></a>分析cookie参数</h3><ol>
-<li>分析逻辑<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> c <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">'valueOf'</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1625118526378   </span>
-token <span class="token operator">=</span> window<span class="token punctuation">[</span><span class="token string">"btoa"</span><span class="token punctuation">]</span><span class="token punctuation">(</span> 
-    a<span class="token punctuation">[</span><span class="token string">"eheZE"</span><span class="token punctuation">]</span><span class="token punctuation">(</span> 
-        a<span class="token punctuation">[</span><span class="token string">"VezOH"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// "aiding_win"</span>
-        a<span class="token punctuation">[</span><span class="token string">"gFoHV"</span><span class="token punctuation">]</span><span class="token punctuation">(</span>String<span class="token punctuation">,</span> c<span class="token punctuation">)</span> <span class="token comment">// "1625108819386"   python:str(c)</span>
-    <span class="token punctuation">)</span> <span class="token comment">// "aiding_win1625108819386"    "aiding_win" + str(c)    python: "aiding_win"+ str(c) </span>
-<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 对 "aiding_win1625108819386" 进行 base64 编码</span>
-md <span class="token operator">=</span> a<span class="token punctuation">[</span><span class="token string">'XQoGX'</span><span class="token punctuation">]</span><span class="token punctuation">(</span>
-        hex_md5<span class="token punctuation">,</span> 
-        window<span class="token punctuation">[</span><span class="token string">"btoa"</span><span class="token punctuation">]</span><span class="token punctuation">(</span>
-        a<span class="token punctuation">[</span><span class="token string">'gNohH'</span><span class="token punctuation">]</span><span class="token punctuation">(</span> 
-            a<span class="token punctuation">[</span><span class="token string">"VezOH"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// "aiding_win"</span>
-            a<span class="token punctuation">[</span><span class="token string">"sibsM"</span><span class="token punctuation">]</span><span class="token punctuation">(</span> 
-                String<span class="token punctuation">,</span> 
-                Math<span class="token punctuation">[</span><span class="token string">"round"</span><span class="token punctuation">]</span><span class="token punctuation">(</span> 
-                    a<span class="token punctuation">[</span><span class="token string">"xHDyr"</span><span class="token punctuation">]</span><span class="token punctuation">(</span>c<span class="token punctuation">,</span> <span class="token number">0x3e8</span><span class="token punctuation">)</span>  <span class="token comment">// 1625108819.386    python:c/1000</span>
-                <span class="token punctuation">)</span>  <span class="token comment">// 对 1625108819.386 四舍五入取整 == 1625108819    python:round(c/1000)</span>
-            <span class="token punctuation">)</span> <span class="token comment">// "1625108819"  转字符串类型   js: String(1625108819)    python: str(round(c/1000))</span>
-        <span class="token punctuation">)</span> <span class="token comment">// "aiding_win1625108819"     "aiding_win"+"1625108819"   python: "aiding_win"+str(round(c/1000))</span>
-    <span class="token punctuation">)</span> <span class="token comment">// "YWlkaW5nX3dpbjE2MjUxMDg4MTk="       base64_str</span>
-<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//   "1eb0ec7446090df575752a23a4511427"   对 base64 编码后的字符串进行 md5 编码     hex_md5(base64_str)   </span>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">’‘’
+    python 执行
+‘’‘
+<span class="token keyword">def</span> <span class="token function">data2email</span><span class="token punctuation">(</span>data_spamprotect<span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment"># o = function(e, t) &#123;...</span>
+    <span class="token keyword">import</span> base64
+    <span class="token comment"># atob(tobj.data("spamprotect"))</span>
+    data_spamprotect_decode <span class="token operator">=</span> <span class="token builtin">str</span><span class="token punctuation">(</span>base64<span class="token punctuation">.</span>b64decode<span class="token punctuation">(</span>data_spamprotect<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'utf8'</span><span class="token punctuation">)</span>
 
-document<span class="token punctuation">[</span><span class="token string">"cookie"</span><span class="token punctuation">]</span> <span class="token operator">=</span> a<span class="token punctuation">[</span><span class="token string">"ttTXc"</span><span class="token punctuation">]</span><span class="token punctuation">(</span> 
-    a<span class="token punctuation">[</span><span class="token string">"ttTXc"</span><span class="token punctuation">]</span><span class="token punctuation">(</span> 
-        a<span class="token punctuation">[</span><span class="token string">"vqcDR"</span><span class="token punctuation">]</span><span class="token punctuation">(</span> 
-            a<span class="token punctuation">[</span><span class="token string">"ITeIW"</span><span class="token punctuation">]</span><span class="token punctuation">(</span>
-                a<span class="token punctuation">[</span><span class="token string">'DTGFR'</span><span class="token punctuation">]</span><span class="token punctuation">(</span>
-                    a<span class="token punctuation">[</span><span class="token string">"Bxtms"</span><span class="token punctuation">]</span><span class="token punctuation">(</span>
-                        a<span class="token punctuation">[</span><span class="token string">"RojwX"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">//  "sign="</span>
-                        Math<span class="token punctuation">[</span><span class="token string">"round"</span><span class="token punctuation">]</span><span class="token punctuation">(</span>
-                            a<span class="token punctuation">[</span><span class="token string">'xHDyr'</span><span class="token punctuation">]</span><span class="token punctuation">(</span>c<span class="token punctuation">,</span> <span class="token number">0x3e8</span><span class="token punctuation">)</span>  <span class="token comment">// 1625108819.386    python:c/1000</span>
-                        <span class="token punctuation">)</span><span class="token comment">// 对 1625108819.386 四舍五入取整，结果为：1625108819    python:round(c/1000)</span>
-                    <span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// "sign=1625108819"     "sign="+ 1625108819</span>
-                    <span class="token string">'~'</span>
-                <span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// "sign=1625108819~"     "sign=1625108819"+'~'</span>
-                token
-            <span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">//  "sign=1625108819~aiding_win1625108819386"     "sign=1625108819~"+ token</span>
-            <span class="token string">'|'</span>
-        <span class="token punctuation">)</span><span class="token punctuation">,</span>  <span class="token comment">//  "sign=1625108819~aiding_win1625108819386|"     "sign=1625108819~aiding_win1625108819386"+'|'</span>
-        md
-    <span class="token punctuation">)</span><span class="token punctuation">,</span>   <span class="token comment">//   "sign=1625108819~aiding_win1625108819386|1eb0ec7446090df575752a23a4511427"    "sign=1625108819~aiding_win1625108819386|"+ md </span>
-    a<span class="token punctuation">[</span><span class="token string">"nZuLl"</span><span class="token punctuation">]</span>  <span class="token comment">// "; path=/"</span>
-<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//   "sign=1625108819~aiding_win1625108819386|1eb0ec7446090df575752a23a4511427; path=/"      "sign=1625108819~aiding_win1625108819386|1eb0ec7446090df575752a23a4511427"+"; path=/"</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+    t <span class="token operator">=</span> data_spamprotect_decode<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">":"</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+    a <span class="token operator">=</span> data_spamprotect_decode
+    n <span class="token operator">=</span> a<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">":"</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+
+    <span class="token keyword">def</span> <span class="token function">o</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        e <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token comment"># e = e.split(""),   js 中 split(""),就是把每个字符都拆出来，对应 python 的其实是 list 函数</span>
+        t <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span> <span class="token comment"># t = t.split("");</span>
+        <span class="token keyword">for</span> a <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token comment"># String.fromCharCode(str) 是将 ascii 编码转为一个字符，对应 python 中的 chr()</span>
+            <span class="token comment"># str.charCodeAt(0) 是将字符串中第一个字符，转为 ascii 码；对应 python 的 ord()</span>
+            e<span class="token punctuation">[</span>a<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token builtin">chr</span><span class="token punctuation">(</span> <span class="token builtin">ord</span><span class="token punctuation">(</span>e<span class="token punctuation">[</span>a<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">^</span> <span class="token builtin">ord</span><span class="token punctuation">(</span>t<span class="token punctuation">[</span>a <span class="token operator">%</span> <span class="token builtin">len</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token string">""</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>e<span class="token punctuation">)</span>
+
+    emali <span class="token operator">=</span> o<span class="token punctuation">(</span>a<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">":"</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> n<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> emali
+
+data_spamprotect <span class="token operator">=</span> <span class="token string">"ODA1ODJhY2FmMGE3ZDNhYmQwMWY3MzljNDpKUVxWVxNNFQ5ZBFsBcwgEEx1aD1JfFwdR"</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span> data2email<span class="token punctuation">(</span>data_spamprotect<span class="token punctuation">)</span> <span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ol>
-<h2 id="完整代码，python还原计算"><a href="#完整代码，python还原计算" class="headerlink" title="完整代码，python还原计算"></a>完整代码，python还原计算</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> base64
-<span class="token keyword">import</span> hashlib
-<span class="token keyword">import</span> time
+<h3 id="分析总结"><a href="#分析总结" class="headerlink" title="分析总结"></a>分析总结</h3><blockquote>
+<p>没啥好总结的</p>
+</blockquote>
+<h2 id="代码验证"><a href="#代码验证" class="headerlink" title="代码验证"></a>代码验证</h2><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">//  node 中执行</span>
+window <span class="token operator">=</span> globalThis
+window<span class="token punctuation">.</span><span class="token function-variable function">atob</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">b64Encoded</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> Buffer<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span>b64Encoded<span class="token punctuation">,</span> <span class="token string">'base64'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+window<span class="token punctuation">.</span><span class="token function-variable function">btoa</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">b64Encoded</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> Buffer<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span>b64Encoded<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token string">'base64'</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
 
-<span class="token comment"># c = int(time.time()*1000)</span>
-c <span class="token operator">=</span> <span class="token number">1587102734000</span>
-token <span class="token operator">=</span> <span class="token builtin">str</span><span class="token punctuation">(</span> base64<span class="token punctuation">.</span>b64encode<span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token string">"aiding_win"</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">'utf-8'</span> <span class="token punctuation">)</span>
-md <span class="token operator">=</span> hashlib<span class="token punctuation">.</span>md5<span class="token punctuation">(</span> <span class="token builtin">str</span><span class="token punctuation">(</span> base64<span class="token punctuation">.</span>b64encode<span class="token punctuation">(</span> <span class="token punctuation">(</span> <span class="token string">"aiding_win"</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span> <span class="token builtin">round</span><span class="token punctuation">(</span> c<span class="token operator">/</span><span class="token number">1000</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">'utf-8'</span> <span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span>encoding<span class="token operator">=</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">.</span>hexdigest<span class="token punctuation">(</span><span class="token punctuation">)</span>
-cookie <span class="token operator">=</span> <span class="token string">"sign="</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span> <span class="token builtin">round</span><span class="token punctuation">(</span> c<span class="token operator">/</span><span class="token number">1000</span> <span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'~'</span> <span class="token operator">+</span> token <span class="token operator">+</span> <span class="token string">'|'</span> <span class="token operator">+</span> md <span class="token operator">+</span> <span class="token string">"; path=/"</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>cookie<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+data_spamprotect <span class="token operator">=</span> <span class="token string">"ODA1ODJhY2FmMGE3ZDNhYmQwMWY3MzljNDpKUVxWVxNNFQ5ZBFsBcwgEEx1aD1JfFwdR"</span>
+<span class="token keyword">function</span> <span class="token constant">SDK</span><span class="token punctuation">(</span><span class="token parameter">data_spamprotect</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> tobj <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+    tobj<span class="token punctuation">.</span><span class="token function-variable function">data</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">v</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span> <span class="token keyword">return</span> data_spamprotect<span class="token punctuation">&#125;</span>
 
+    <span class="token keyword">var</span> e<span class="token punctuation">,</span> 
+        a <span class="token operator">=</span> <span class="token punctuation">(</span>e <span class="token operator">=</span> tobj<span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token string">"spamprotect"</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">atob</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
+        n <span class="token operator">=</span> a<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">":"</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
+        <span class="token function-variable function">o</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">e<span class="token punctuation">,</span> t</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            e <span class="token operator">=</span> e<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            t <span class="token operator">=</span> t<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> a <span class="token operator">&lt;</span> e<span class="token punctuation">.</span>length<span class="token punctuation">;</span> a<span class="token operator">++</span><span class="token punctuation">)</span>
+                e<span class="token punctuation">[</span>a<span class="token punctuation">]</span> <span class="token operator">=</span> String<span class="token punctuation">.</span><span class="token function">fromCharCode</span><span class="token punctuation">(</span>e<span class="token punctuation">[</span>a<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">charCodeAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">^</span> t<span class="token punctuation">[</span>a <span class="token operator">%</span> t<span class="token punctuation">.</span>length<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">charCodeAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> e<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">(</span>a<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">":"</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> o
+<span class="token punctuation">&#125;</span>
 
-
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"SDK: "</span><span class="token punctuation">,</span> <span class="token constant">SDK</span><span class="token punctuation">(</span>data_spamprotect<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 	</div>
 
 	
@@ -757,7 +768,7 @@ cookie <span class="token operator">=</span> <span class="token string">"sign="<
 	
 		<div class="post-tags">
 			<i class="fa fa-tags" aria-hidden="true"></i>
-			<a class="tag badge badge-secondary post-meta-detail-tag -none-link" href="/tags/js%E9%80%86%E5%90%91/" rel="tag">js逆向</a><a class="tag badge badge-secondary post-meta-detail-tag -none-link" href="/tags/%E7%8C%BF%E4%BA%BA%E5%AD%A6/" rel="tag">猿人学</a><a class="tag badge badge-secondary post-meta-detail-tag -none-link" href="/tags/%E9%80%86%E5%90%91%E6%80%9D%E8%B7%AF/" rel="tag">逆向思路</a>
+			<a class="tag badge badge-secondary post-meta-detail-tag -none-link" href="/tags/js%E9%80%86%E5%90%91/" rel="tag">js逆向</a><a class="tag badge badge-secondary post-meta-detail-tag -none-link" href="/tags/%E9%80%86%E5%90%91%E6%80%9D%E8%B7%AF/" rel="tag">逆向思路</a>
 		</div>
 	
 </article>
@@ -799,7 +810,7 @@ cookie <span class="token operator">=</span> <span class="token string">"sign="<
 				<span class="btn-inner--icon"><i class="fa fa-twitter"></i></span>
 			</button>
 		</a>
-		<a target="_blank" class="no-pjax icon-telegram" href="https://telegram.me/share/url?url=https://pinetang.github.io.git/2021/07/01/%E7%8C%BF%E4%BA%BA%E5%AD%A6%E7%BB%83%E4%B9%A0%E5%B9%B3%E5%8F%B0-2%E2%80%94%E2%80%94js%E5%8A%A0%E5%AF%86%E2%80%94%E2%80%94%E7%AE%80%E6%98%93%E5%8A%A8%E6%80%81js%E5%8A%A0%E5%AF%86%E8%A7%A3%E6%9E%90%E2%80%94%E2%80%94%E7%AE%80%E5%8D%95/&text=猿人学练习平台 2——js加密——简易动态js加密解析——简单" tooltip="分享到 Telegram">
+		<a target="_blank" class="no-pjax icon-telegram" href="https://telegram.me/share/url?url=https://pinetang.github.io.git/2021/12/16/%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E9%82%AE%E7%AE%B1%E8%A7%A3%E5%AF%86/&text=一次简单的邮箱解密" tooltip="分享到 Telegram">
 			<button class="btn btn-icon btn-primary" style="background: #42a5f5;border: none;">
 				<span class="btn-inner--icon"><i class="fa fa-telegram"></i></span>
 			</button>
@@ -816,15 +827,12 @@ cookie <span class="token operator">=</span> <span class="token string">"sign="<
 </div>
 <script type="text/javascript">
 	socialShare("#share", {
-	    title : '猿人学练习平台 2——js加密——简易动态js加密解析——简单',
-	    description : '题目地址
-分析查看请求信息
-刷新页面会，打开控制台会无限 debugger，把它过掉
-
-然后再次刷新...',
+	    title : '一次简单的邮箱解密',
+	    description : '分析查看请求相关信息
+愉快的做着 Xpath 工程师，以及灵活的 Ctrl C、Ctrl V，突然就...',
 	    wechatQrcodeTitle : "分享到微信",
 	    wechatQrcodeHelper : '微信扫描二维码',
-	    source : 'https://pinetang.github.io.git/2021/07/01/%E7%8C%BF%E4%BA%BA%E5%AD%A6%E7%BB%83%E4%B9%A0%E5%B9%B3%E5%8F%B0-2%E2%80%94%E2%80%94js%E5%8A%A0%E5%AF%86%E2%80%94%E2%80%94%E7%AE%80%E6%98%93%E5%8A%A8%E6%80%81js%E5%8A%A0%E5%AF%86%E8%A7%A3%E6%9E%90%E2%80%94%E2%80%94%E7%AE%80%E5%8D%95/'
+	    source : 'https://pinetang.github.io.git/2021/12/16/%E4%B8%80%E6%AC%A1%E7%AE%80%E5%8D%95%E7%9A%84%E9%82%AE%E7%AE%B1%E8%A7%A3%E5%AF%86/'
 	});
 	$("#share_show")[0].onclick = function(){
 		$("#share_container").addClass("opened");
@@ -888,7 +896,7 @@ cookie <span class="token operator">=</span> <span class="token string">"sign="<
 </div>
 
 
-<div class="post-navigation card shadow-sm"><div class="post-navigation-item post-navigation-pre"><span class="page-navigation-extra-text"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>上一篇</span><a href="/2021/08/08/Mac-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE-Homebrew/" rel="prev"> Mac 环境配置--Homebrew</a></div><div class="post-navigation-item post-navigation-next"><span class="page-navigation-extra-text">下一篇 <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span><a href="/2021/06/30/%E7%8C%BF%E4%BA%BA%E5%AD%A6%E7%BB%83%E4%B9%A0%E5%B9%B3%E5%8F%B0-1%E2%80%94%E2%80%94js%E5%8A%A0%E5%AF%86%E2%80%94%E2%80%94%E6%97%A0%E6%B7%B7%E6%B7%86js%E5%8A%A0%E5%AF%86%E2%80%94%E2%80%94%E7%AE%80%E5%8D%95/" rel="next"> 猿人学练习平台 1——js加密——无混淆js加密——简单</a></div></div>
+<div class="post-navigation card shadow-sm"><div class="post-navigation-item post-navigation-pre"></div><div class="post-navigation-item post-navigation-next"><span class="page-navigation-extra-text">下一篇 <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span><a href="/2021/12/13/headers%E7%AD%BE%E5%90%8D%E9%80%86%E5%90%91/" rel="next"> headers签名逆向</a></div></div>
 
 
 
