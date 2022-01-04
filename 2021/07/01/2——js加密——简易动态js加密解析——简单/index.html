@@ -3,15 +3,15 @@
 <html class="use-big-shadow article-header-style-default">
 <head>
 	
-	<title>猿人学练习平台 2——js加密——简易动态js加密解析——简单 - 程序BUG猿</title>
+	<title>2——js加密——简易动态js加密解析——简单 - 程序BUG猿</title>
 	<meta charset="utf-8">
 	
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	
 	<meta name="description" content="题目地址 分析查看请求信息 刷新页面会，打开控制台会无限 debugger，把它过掉  然后再次刷新就正常了  经过尝试，会发现在第一个请求的时候，cookie 中的 sign 值就已经在请求头了，所以应该是本地计算完成的，接下来就是找到计算的位置    定位 一般我会用 XHR 断点，但是这里不属于 XHR 请求方式，所以直接下 script事件监听断点   为了方便查看，断点下好后，先去 co">
 <meta property="og:type" content="article">
-<meta property="og:title" content="猿人学练习平台 2——js加密——简易动态js加密解析——简单">
-<meta property="og:url" content="https://pinetang.github.io.git/2021/07/01/%E7%8C%BF%E4%BA%BA%E5%AD%A6%E7%BB%83%E4%B9%A0%E5%B9%B3%E5%8F%B0-2%E2%80%94%E2%80%94js%E5%8A%A0%E5%AF%86%E2%80%94%E2%80%94%E7%AE%80%E6%98%93%E5%8A%A8%E6%80%81js%E5%8A%A0%E5%AF%86%E8%A7%A3%E6%9E%90%E2%80%94%E2%80%94%E7%AE%80%E5%8D%95/index.html">
+<meta property="og:title" content="2——js加密——简易动态js加密解析——简单">
+<meta property="og:url" content="https://pinetang.github.io.git/2021/07/01/2%E2%80%94%E2%80%94js%E5%8A%A0%E5%AF%86%E2%80%94%E2%80%94%E7%AE%80%E6%98%93%E5%8A%A8%E6%80%81js%E5%8A%A0%E5%AF%86%E8%A7%A3%E6%9E%90%E2%80%94%E2%80%94%E7%AE%80%E5%8D%95/index.html">
 <meta property="og:site_name" content="程序BUG猿">
 <meta property="og:description" content="题目地址 分析查看请求信息 刷新页面会，打开控制台会无限 debugger，把它过掉  然后再次刷新就正常了  经过尝试，会发现在第一个请求的时候，cookie 中的 sign 值就已经在请求头了，所以应该是本地计算完成的，接下来就是找到计算的位置    定位 一般我会用 XHR 断点，但是这里不属于 XHR 请求方式，所以直接下 script事件监听断点   为了方便查看，断点下好后，先去 co">
 <meta property="og:locale">
@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20210701150119_6.png">
 <meta property="og:image" content="https://gitee.com/PineKer/myfiles/raw/master/blog/20210701150358_7.png">
 <meta property="article:published_time" content="2021-07-01T06:06:07.000Z">
-<meta property="article:modified_time" content="2021-08-08T11:37:53.948Z">
+<meta property="article:modified_time" content="2022-01-04T05:44:16.274Z">
 <meta property="article:author" content="Tangs">
 <meta property="article:tag" content="js逆向">
 <meta property="article:tag" content="逆向思路">
@@ -600,13 +600,13 @@
 				<img class='post-thumbnail lazyload' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABBJREFUeNpi+P//PwNAgAEACPwC/tuiTRYAAAAASUVORK5CYII=' data-original='https://gitee.com/PineKer/myfiles/raw/master/blog/20210701143216_1.png' alt='thumbnail'></img>
 				<div class='post-header-text-container'>
 			
-		<a class="post-title" href="/2021/07/01/%E7%8C%BF%E4%BA%BA%E5%AD%A6%E7%BB%83%E4%B9%A0%E5%B9%B3%E5%8F%B0-2%E2%80%94%E2%80%94js%E5%8A%A0%E5%AF%86%E2%80%94%E2%80%94%E7%AE%80%E6%98%93%E5%8A%A8%E6%80%81js%E5%8A%A0%E5%AF%86%E8%A7%A3%E6%9E%90%E2%80%94%E2%80%94%E7%AE%80%E5%8D%95/">猿人学练习平台 2——js加密——简易动态js加密解析——简单</a>
+		<a class="post-title" href="/2021/07/01/2%E2%80%94%E2%80%94js%E5%8A%A0%E5%AF%86%E2%80%94%E2%80%94%E7%AE%80%E6%98%93%E5%8A%A8%E6%80%81js%E5%8A%A0%E5%AF%86%E8%A7%A3%E6%9E%90%E2%80%94%E2%80%94%E7%AE%80%E5%8D%95/">2——js加密——简易动态js加密解析——简单</a>
 		<div class="post-meta">
 			
 						
 						<div class="post-meta-detail post-meta-detail-time">
 							<i class="fa fa-clock-o" aria-hidden="true"></i>
-							<time title="发布于 2021-7-1 14:06:07 | 编辑于 2021-8-8 19:37:53">2021-7-1 14:06
+							<time title="发布于 2021-7-1 14:06:07 | 编辑于 2022-1-4 13:44:16">2021-7-1 14:06
 							</time>
 						</div>
 					
@@ -799,7 +799,7 @@ cookie <span class="token operator">=</span> <span class="token string">"sign="<
 				<span class="btn-inner--icon"><i class="fa fa-twitter"></i></span>
 			</button>
 		</a>
-		<a target="_blank" class="no-pjax icon-telegram" href="https://telegram.me/share/url?url=https://pinetang.github.io.git/2021/07/01/%E7%8C%BF%E4%BA%BA%E5%AD%A6%E7%BB%83%E4%B9%A0%E5%B9%B3%E5%8F%B0-2%E2%80%94%E2%80%94js%E5%8A%A0%E5%AF%86%E2%80%94%E2%80%94%E7%AE%80%E6%98%93%E5%8A%A8%E6%80%81js%E5%8A%A0%E5%AF%86%E8%A7%A3%E6%9E%90%E2%80%94%E2%80%94%E7%AE%80%E5%8D%95/&text=猿人学练习平台 2——js加密——简易动态js加密解析——简单" tooltip="分享到 Telegram">
+		<a target="_blank" class="no-pjax icon-telegram" href="https://telegram.me/share/url?url=https://pinetang.github.io.git/2021/07/01/2%E2%80%94%E2%80%94js%E5%8A%A0%E5%AF%86%E2%80%94%E2%80%94%E7%AE%80%E6%98%93%E5%8A%A8%E6%80%81js%E5%8A%A0%E5%AF%86%E8%A7%A3%E6%9E%90%E2%80%94%E2%80%94%E7%AE%80%E5%8D%95/&text=2——js加密——简易动态js加密解析——简单" tooltip="分享到 Telegram">
 			<button class="btn btn-icon btn-primary" style="background: #42a5f5;border: none;">
 				<span class="btn-inner--icon"><i class="fa fa-telegram"></i></span>
 			</button>
@@ -816,7 +816,7 @@ cookie <span class="token operator">=</span> <span class="token string">"sign="<
 </div>
 <script type="text/javascript">
 	socialShare("#share", {
-	    title : '猿人学练习平台 2——js加密——简易动态js加密解析——简单',
+	    title : '2——js加密——简易动态js加密解析——简单',
 	    description : '题目地址
 分析查看请求信息
 刷新页面会，打开控制台会无限 debugger，把它过掉
@@ -824,7 +824,7 @@ cookie <span class="token operator">=</span> <span class="token string">"sign="<
 然后再次刷新...',
 	    wechatQrcodeTitle : "分享到微信",
 	    wechatQrcodeHelper : '微信扫描二维码',
-	    source : 'https://pinetang.github.io.git/2021/07/01/%E7%8C%BF%E4%BA%BA%E5%AD%A6%E7%BB%83%E4%B9%A0%E5%B9%B3%E5%8F%B0-2%E2%80%94%E2%80%94js%E5%8A%A0%E5%AF%86%E2%80%94%E2%80%94%E7%AE%80%E6%98%93%E5%8A%A8%E6%80%81js%E5%8A%A0%E5%AF%86%E8%A7%A3%E6%9E%90%E2%80%94%E2%80%94%E7%AE%80%E5%8D%95/'
+	    source : 'https://pinetang.github.io.git/2021/07/01/2%E2%80%94%E2%80%94js%E5%8A%A0%E5%AF%86%E2%80%94%E2%80%94%E7%AE%80%E6%98%93%E5%8A%A8%E6%80%81js%E5%8A%A0%E5%AF%86%E8%A7%A3%E6%9E%90%E2%80%94%E2%80%94%E7%AE%80%E5%8D%95/'
 	});
 	$("#share_show")[0].onclick = function(){
 		$("#share_container").addClass("opened");
@@ -888,7 +888,7 @@ cookie <span class="token operator">=</span> <span class="token string">"sign="<
 </div>
 
 
-<div class="post-navigation card shadow-sm"><div class="post-navigation-item post-navigation-pre"><span class="page-navigation-extra-text"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>上一篇</span><a href="/2021/08/08/Mac-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE-Homebrew/" rel="prev"> Mac 环境配置--Homebrew</a></div><div class="post-navigation-item post-navigation-next"><span class="page-navigation-extra-text">下一篇 <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span><a href="/2021/06/30/%E7%8C%BF%E4%BA%BA%E5%AD%A6%E7%BB%83%E4%B9%A0%E5%B9%B3%E5%8F%B0-1%E2%80%94%E2%80%94js%E5%8A%A0%E5%AF%86%E2%80%94%E2%80%94%E6%97%A0%E6%B7%B7%E6%B7%86js%E5%8A%A0%E5%AF%86%E2%80%94%E2%80%94%E7%AE%80%E5%8D%95/" rel="next"> 猿人学练习平台 1——js加密——无混淆js加密——简单</a></div></div>
+<div class="post-navigation card shadow-sm"><div class="post-navigation-item post-navigation-pre"><span class="page-navigation-extra-text"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>上一篇</span><a href="/2021/08/08/Mac-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE-Homebrew/" rel="prev"> Mac 环境配置--Homebrew</a></div><div class="post-navigation-item post-navigation-next"><span class="page-navigation-extra-text">下一篇 <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></span><a href="/2021/06/30/1%E2%80%94%E2%80%94js%E5%8A%A0%E5%AF%86%E2%80%94%E2%80%94%E6%97%A0%E6%B7%B7%E6%B7%86js%E5%8A%A0%E5%AF%86%E2%80%94%E2%80%94%E7%AE%80%E5%8D%95/" rel="next"> 1——js加密——无混淆js加密——简单</a></div></div>
 
 
 
